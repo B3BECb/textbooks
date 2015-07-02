@@ -1,0 +1,299 @@
+body
+{
+  font-family: times new roman;
+  background-color: #FDF8E4;
+}
+
+
+
+/*Обобщения*/
+select, input, .button, .checkbox label:after, textarea
+{  
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgb(238, 236, 222);  
+  width: 7em;
+  height: 2em;
+  transition: 0.5s;
+}
+.button, .upload_visible_div, .colorSelect, .checkbox
+{
+  position: relative;
+}
+.button, .upload_visible_div
+{
+  display: inline-table;
+}
+select, input, textarea
+{
+  border-radius: 7px;
+  margin: 5px;
+}
+
+
+
+/*      Анимация      */
+.button:hover, select:hover, input:hover, textarea:hover
+{
+  background: rgb(216, 255, 205);
+  border: 1px solid rgb(108, 147, 105);
+}
+.topButton:hover
+{
+  width: 90px;
+  border-radius: 23px;
+  background: rgba(255, 152, 88, 0.87);
+  border-color: rgb(205, 134, 82);
+}
+.searchButton:hover
+{
+  border-radius: 23px;
+}
+#searchBtn:hover 
+{
+  width: 90px;
+  background: rgba(255, 152, 88, 0.87);
+  border-color: rgb(205, 134, 82);
+}
+#addBtn:hover
+{
+  width: 110px;
+  background: rgba(255, 152, 88, 0.87);
+  border-color: rgb(205, 134, 82);
+}
+#searchBtn:hover ~ .searchElements, .searchElements:hover
+{
+  height: 40px;
+}
+
+
+
+/*Строка управления авторизацией*/
+.top
+{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50;
+  margin-bottom: 30px;
+}
+.topBg
+{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #A7CB61;
+  z-index: -1;
+  opacity: 0.6;  
+  border-bottom: 1px solid rgb(98, 120, 41);
+}
+.topContent
+{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center; 
+  margin-top: 15px;
+}
+.topButton, .searchButton
+{
+  border: 1px solid rgba(159, 171, 115, 1);
+  width: 33;
+  height: 33;
+  border-radius: 50% ;
+  position: absolute;
+  right: 10px;
+  display: inline-block;
+  top: -8px;
+  background: rgba(247, 242, 148, 1);
+  overflow: hidden;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.topButtonText
+{
+  position: absolute;
+  right: 35px;
+  height: 100%;
+  padding-top: 7px;
+  padding-right: 5px;
+  padding-left: 6px;
+  border-right: 1px solid rgb(205, 134, 82);
+  background: rgb(255, 213, 187);
+}
+.topButton img, .searchButton img
+{
+  height: 33;
+  width: 33;
+  position: absolute;
+  right: -3px;
+}
+.topActions
+{
+  position: relative;
+  height: 70px;
+}
+.searchButton
+{
+  position: relative;
+  top: 0px;
+  background: rgba(247, 242, 148, 1);
+  border: 1px solid rgba(159, 171, 115, 1);
+}
+.searchElements
+{
+  overflow: hidden;
+  height: 0px;
+  position: relative;
+  top: -5px;
+}
+
+
+
+/*Кнопки*/
+.button
+{
+  margin: 5;
+  border-radius: 10px 10px 10px 10px;
+  overflow: hidden;
+  text-align: center;
+  cursor: context-menu;
+  vertical-align: middle;
+}
+.buttonText
+{
+  display:table-cell;
+  vertical-align: middle; 
+}
+
+
+
+/*Чекбоксы*/
+.checkbox {
+	position:relative;
+	padding-left:25px;
+	margin: 5px;
+	overflow: hidden;
+}
+.checkbox input[type=checkbox] {
+	display:none;
+}
+.checkbox label:after {
+	content:'';
+	display:block;
+	height:14px;
+	width:14px;
+	outline:1px solid #939598;
+	position:absolute;
+	top:1;
+	left:1;
+}
+.checkbox input[type=checkbox]:checked + label:after {
+	outline:1px solid #939598;
+	border:2px solid #fff;
+	width:11px;
+	height:11px;
+	background-color:#63849F;
+}
+
+
+
+/*Файловая система*/
+.upload_visible
+{
+  margin-left: -5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 175px;
+  display: table-caption;
+  vertical-align: middle;
+}
+
+
+
+/*Выбор цвета*/
+.colorPeaker
+{
+  margin: 5px;
+}
+.colorSelect
+{  
+  width: 33;
+  border-radius: 50%;
+  height: 33;
+  background: black;
+}
+
+
+
+/*Селект*/
+select
+{
+  width: inherit;
+}
+
+
+
+/*Текстовые инпуты*/
+input[type=text]
+{
+  width: inherit;
+}
+
+
+
+/*Модальное окно*/
+.modalWindow
+{
+  width: 300;
+  height: 200;
+  position: relative;
+  margin:0 auto;
+  overflow: hidden;  
+  border-radius: 40px;
+  border: 1px solid rgb(170, 167, 192);
+}
+.modalWindow .content
+{
+  position: relative;
+  height: inherit;
+  padding: 5px;
+  top: -100%;
+  text-align: center;
+}
+.modalWindowBg
+{
+  width: 100%;
+  height: 100%;
+  background: blue;
+  opacity: 0.2;
+  position: inherit;
+}
+.modalContainer
+{
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  /*height: 100%;*/
+}
+.modalWindowCaption
+{
+  position: relative;
+  background-color: rgba(201, 238, 255, 0.5);
+  top: -5px;
+  padding-top: 5;
+  padding-bottom: 5;
+  width: 103%;
+  left: -7px;
+}
+.modalWindowPageBg
+{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: rgb(0, 0, 0);
+  top: 0;
+  opacity: 0.3;
+}
