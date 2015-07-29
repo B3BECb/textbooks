@@ -52,24 +52,24 @@
 				case 2://учитель
 					$teacher = new teacherMainMenu($_SESSION['userId']);
 
-					if (empty($_GET) && empty($_POST)) 
+					if (empty($_GET) && empty($_POST)) //если нет запросов
 					{						
 						$teacher->getMenu();
 						return;
 					}
 
-					foreach ($_GET as $key => $value)
+					foreach ($_GET as $key => $value) //парсинг get запросов
 						switch ($key) {	
-							/*default:
+							default:
 								$teacher = new teacherMainMenu($_SESSION['userId']);
 								$teacher->getMenu(); return;
-							break;*/
+							break;
 						}			
 
-					foreach ($_POST as $key => $value)
+					foreach ($_POST as $key => $value) //парсинг post запросов
 						switch ($key) {		
 							case 'newThemeName':
-								$teacher->newTheme($_POST['newThemeName'], $_POST['newThemeDiscription'], $_FILES['upload']['name']);
+								$teacher->newTheme($_POST['newThemeName'], $_POST['newThemeDiscription'], $_FILES['upload']);
 								return;
 							break;
 						}	

@@ -37,12 +37,16 @@ select, input, textarea
   background: rgb(216, 255, 205);
   border: 1px solid rgb(108, 147, 105);
 }
-.topButton:hover
+.topButton:hover, .controlButton:hover
 {
   width: 90px;
   border-radius: 23px;
   background: rgba(255, 152, 88, 0.87);
   border-color: rgb(205, 134, 82);
+}
+.controlButton:hover
+{
+  width: 110px;
 }
 .searchButton:hover
 {
@@ -95,7 +99,7 @@ select, input, textarea
   text-align: center; 
   margin-top: 15px;
 }
-.topButton, .searchButton
+.topButton, .controlButton, .searchButton
 {
   border: 1px solid rgba(159, 171, 115, 1);
   width: 33;
@@ -117,11 +121,11 @@ select, input, textarea
   height: 100%;
   padding-top: 7px;
   padding-right: 5px;
-  padding-left: 6px;
+  padding-left: 35px;
   border-right: 1px solid rgb(205, 134, 82);
   background: rgb(255, 213, 187);
 }
-.topButton img, .searchButton img
+.topButton img, .searchButton img, .controlButton img
 {
   height: 33;
   width: 33;
@@ -296,4 +300,51 @@ input[type=text]
   background: rgb(0, 0, 0);
   top: 0;
   opacity: 0.3;
+}
+
+
+/*Квадраты с темами и материалом*/
+.objBox
+{
+  width: 300;
+  height: 300;
+  border: 1px solid black;
+  margin-left: 5px;
+  display: inline-block;
+  position: relative;
+}
+.objImg
+{
+  background: black;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.objName
+{
+  height: 100%;
+  width: 100%;
+  background-color: aqua;
+  position: relative;
+  top: -100%;
+  text-align: center;
+}
+.objName .name
+{
+  top: 12;
+  position: relative;
+  font-weight: bold;
+}
+.objControls
+{
+  height: 35;
+  width: 100%;
+  background: blue;
+  bottom: 0px;
+  position: absolute;
+  text-align: center;
+}
+.jbjControl
+{
+  margin-right: 5px;
 }
