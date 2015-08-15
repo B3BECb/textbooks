@@ -34,12 +34,16 @@
 			</div>
 		</div>		
 
-		<div style="  margin-top: 30px; position: absolute;">
+		<div id="objectsBody" style="  margin-top: 30px; position: absolute;">
+
 			<div class="objBox">
 				<img class="objImg" src="">
 				<div class="objName"> 
 					<span class="name">Название темы</span>
-				</div>				
+				</div>	
+				<div class="objDiscription">
+					Описание темы 
+				</div>			
 				<div class="objControls">
 					<span class="topBtn">
 						<div class="controlButton" style="top:0px; position:relative;">
@@ -58,10 +62,10 @@
 
 		</div>
 
-		<div id="addThemeModalWindow" class="modalContainer" style=" top: 100px; display:none;">
+		<div id="addThemeModalWindow" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
 			<div class="modalWindowPageBg"></div>
 			<div class="modalWindow" style=" height: 370px; width: 370px;">
-				<div class="modalWindowBg" style="background: rgb(0, 179, 255);"></div>
+				<div class="modalWindowBg" style="background: rgb(134, 177, 195);"></div>
 				<div class="content">
 					<form action="../../index.php" method="POST" target="rFrame" enctype="multipart/form-data" id="newTheme">
 						<div class="modalWindowCaption">

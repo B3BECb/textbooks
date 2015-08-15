@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   id="svg3344"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   viewBox="0 0 48 48"
+   sodipodi:docname="delete.svg">
+  <defs
+     id="defs3346" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7"
+     inkscape:cx="29.506752"
+     inkscape:cy="24"
+     inkscape:current-layer="layer1-9"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="687"
+     inkscape:window-height="551"
+     inkscape:window-x="6"
+     inkscape:window-y="95"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3349">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <g
+       inkscape:label="Layer 1"
+       id="layer1-0"
+       transform="matrix(0.71203654,-0.70214241,0.70214241,0.71203654,-7.0912801,19.871723)">
+      <g
+         transform="matrix(1.2996747,0,0,1.2996747,3.0814786,2.6414382)"
+         id="layer1-94"
+         inkscape:label="Layer 1">
+        <g
+           inkscape:label="Layer 1"
+           id="layer1-9"
+           transform="translate(-25.174456,-6.4207751)">
+          <rect
+             transform="scale(-1,-1)"
+             ry="1.9713246"
+             rx="2.4257255"
+             y="-35.398617"
+             x="-38.560982"
+             height="28.86051"
+             width="5.5015345"
+             id="rect2993-7-4"
+             style="fill:#c57163;fill-opacity:1;stroke:none" />
+          <rect
+             transform="matrix(0,1,1,0,0,0)"
+             ry="1.9713246"
+             rx="2.4257255"
+             y="21.295485"
+             x="17.964167"
+             height="28.86051"
+             width="5.5015345"
+             id="rect2993-7-4-8"
+             style="fill:#c57163;fill-opacity:1;stroke:none" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

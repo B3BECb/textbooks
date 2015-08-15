@@ -15,6 +15,19 @@
 			</script> 
 			';  
 		}
+
+		function removeDirectory($dir) 
+		{
+			
+			if ($objs = glob($dir."/*")) 
+			{
+				foreach($objs as $obj) 
+				{
+					is_dir($obj) ? removeDirectory($obj) : unlink($obj);
+				}
+			}
+			rmdir($dir);
+		}
 	}
 
 	/**
@@ -56,19 +69,29 @@
 			//Создать новую директорию темы
 			mkdir("themes/theme_$lastInsertId");
 
-			if ($themeIMG)
+			try
 			{
-				$dir = "themes/theme_$lastInsertId"; // путь к каталогу загрузок на сервере			
-				$name = basename($themeIMG['name']);//имя файла и расширение
-				$file = "$dir/$name";//полный путь к файлу
-				
-				$success = move_uploaded_file($themeIMG['tmp_name'], $file);
+				if ($themeIMG['tmp_name'])//!! сделать допустимые форматы!!! Добавить блок try
+				{
+					$extention = pathinfo($fileName, PATHINFO_EXTENSION);
+					if (($extention != 'png') && ($extention != 'PNG') && ($extention != 'svg') && ($extention != 'SVG')) throw new Exception("Недопустимое расширение файла."); 
 
-			} else $success = 1;						
+					$dir = "themes/theme_$lastInsertId"; // путь к каталогу загрузок на сервере			
+					$name = basename($themeIMG['name']);//имя файла и расширение
+					$file = "$dir/$name";//полный путь к файлу				
 
-			if ($success) $this->jsOnResponse("{'message':'Тема создана.', 'success':'" . $success . "', 'teacherId':'" . $this->id . "', 'themeName':'" . $themeName . "', 'themeDiscription':'" . $themeDiscription . "', 'themeIMG':'" . $themeIMG['name'] . "'}");
-			else $this->jsOnResponse("{'message':'Тема не создана!', 'success':'" . $success . "'}");
-			//если есть файл, то загружаем его
+					if (!($success = move_uploaded_file($themeIMG['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
+
+				} else $success = 1;
+			}
+			catch (Exception $e)
+			{
+				//$this->removeDirectory("themes/theme_$lastInsertId");
+				//mysql_query();
+				$this->jsOnResponse("{'message':'Тема не создана! ".$e->getMessage()."', 'success':'0'}");
+			}						
+
+			if ($success) $this->jsOnResponse("{'message':'Тема создана.', 'success':'1', 'teacherId':'" . $this->id . "', 'themeName':'" . $themeName . "', 'themeDiscription':'" . $themeDiscription . "', 'themeIMG':'/" . $file . "'}");
 		}
 	}
 ?>
