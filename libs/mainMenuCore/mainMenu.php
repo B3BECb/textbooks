@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/**
 	* Родительский класс пользователей git!
 	*/
@@ -71,10 +71,11 @@
 
 			try
 			{
-				if ($themeIMG['tmp_name'])//!! сделать допустимые форматы!!! Добавить блок try
+				if ($themeIMG['tmp_name'])
 				{
-					$extention = pathinfo($fileName, PATHINFO_EXTENSION);
-					if (($extention != 'png') && ($extention != 'PNG') && ($extention != 'svg') && ($extention != 'SVG')) throw new Exception("Недопустимое расширение файла."); 
+					$ExtentionsClassificator = new extensionClassificator();
+					$extention = pathinfo($themeIMG['name'], PATHINFO_EXTENSION);
+					if ($ExtentionsClassificator->classificate($extention) != "pics") throw new Exception("Недопустимое расширение файла($extention)."); 
 
 					$dir = "themes/theme_$lastInsertId"; // путь к каталогу загрузок на сервере			
 					$name = basename($themeIMG['name']);//имя файла и расширение
@@ -86,12 +87,13 @@
 			}
 			catch (Exception $e)
 			{
-				//$this->removeDirectory("themes/theme_$lastInsertId");
-				//mysql_query();
+				$this->removeDirectory("themes/theme_$lastInsertId");
+				mysql_query("DELETE FROM themes WHERE theme_id = $lastInsertId;");
+
 				$this->jsOnResponse("{'message':'Тема не создана! ".$e->getMessage()."', 'success':'0'}");
 			}						
 
-			if ($success) $this->jsOnResponse("{'message':'Тема создана.', 'success':'1', 'teacherId':'" . $this->id . "', 'themeName':'" . $themeName . "', 'themeDiscription':'" . $themeDiscription . "', 'themeIMG':'/" . $file . "'}");
+			if ($success) $this->jsOnResponse("{'message':'Тема создана.', 'success':'1', 'teacherId':'" . $this->id . "', 'themeName':'$themeName', 'themeDiscription':'$themeDiscription', 'themeIMG':'$file'}");
 		}
 	}
 ?>

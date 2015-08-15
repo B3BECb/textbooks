@@ -310,6 +310,7 @@ input[type=text]
   margin-left: 5px;
   display: inline-block;
   position: relative;
+  margin-bottom: 10px;
 }
 .objImg
 {

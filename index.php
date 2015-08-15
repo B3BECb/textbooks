@@ -1,7 +1,8 @@
 <?php
 	session_start();
 	require_once "libs/loginCore/login.php";
-	require_once "libs/mainMenuCore/mainMenu.php";
+	require_once "libs/mainMenuCore/mainMenu.php"; 
+	require_once "libs/ExtentionsClassificator.php";
 
 	@mysql_connect("localhost", "root") or die ("Could not connect to MySQL server!"); 
 	@mysql_select_db("textbooks") or die ("Could not select products database!");
