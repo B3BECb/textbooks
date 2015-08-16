@@ -3,12 +3,9 @@
 ?>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../../css/elements.css">
-		<link rel="stylesheet" type="text/css" href="libs/mainMenuCore/css/main.css">
-		<script type="text/javascript" src="../../js/jquery/jquery-2.1.4.min.js"></script>		
-		<script type="text/javascript" src="libs/mainMenuCore/js/styles.js"></script>
-		<script type="text/javascript" src="../../js/queryToServer.js"></script>
-		<script type="text/javascript" src="libs/mainMenuCore/js/mainMenu.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../../css/elements.css">
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<script type="text/javascript" src="../../js/jquery/jquery-2.1.4.min.js"></script>
 		<style type="text/css">
 		</style>
 	</head>
@@ -36,7 +33,29 @@
 
 		<div id="objectsBody" style="  margin-top: 30px; position: absolute;">
 
-			<?php echo $this->getThemes(); ?>			
+			<div class="objBox">
+				<img class="objImg" src="">
+				<div class="objName"> 
+					<span class="name">Название темы</span>
+				</div>	
+				<div class="objDiscription">
+					Описание темы 
+				</div>			
+				<div class="objControls">
+					<span class="topBtn">
+						<div class="controlButton" style="top:0px; position:relative;">
+							<span class="topButtonText">Изменить</span>
+							<img src="../../svgs/edit.svg">
+						</div>
+					</span>
+					<span class="topBtn">
+						<div class="controlButton" style="top:0px; position:relative;">
+							<span class="topButtonText">Удалить</span>
+							<img src="../../svgs/delete.svg">
+						</div>
+					</span>
+				</div>
+			</div>			
 
 		</div>
 
