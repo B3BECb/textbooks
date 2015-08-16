@@ -7,22 +7,22 @@
 	<body>
 		<div class="modalContainer">
 			<div class="modalWindow" style="height:160;">
-				<div class="modalWindowBg"></div>
-				<div class="content">
+				<div class="modalWindowBg" style="background: #B8D5EC;"></div>
+				<form class="content" id="form1" action="index.php" method="POST">					
 					<div style="">
 						Логин<br>
-						<input id="log" type="text"/><br>
+						<input name="log" type="text"/><br>
 					</div>
 
 					<div style="">
 						Пароль<br>
-						<input id="pas" type="text"/><br>
+						<input name="pas" type="text"/><br>
 					</div>
 
 					<div style="">
-						<div class="button" onclick="location.href = 'index.php?log='+log.value+'&pas='+pas.value"><span class="buttonText">Войти</span></div>
-					</div>
-				</div>
+						<div class="button" onclick="form1.submit();"><span class="buttonText">Войти</span></div>
+					</div>					
+				</form>
 			</div>
 		<div>
 	</body>

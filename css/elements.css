@@ -333,10 +333,11 @@ input[type=text]
   text-align: center;
   z-index: 2;
   background: rgba(201, 221, 149, 0.84);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .objName .name
 {
-  top: 12;
   position: relative;
   font-weight: bold;
 }

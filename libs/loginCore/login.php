@@ -6,9 +6,11 @@
 	{
 		private $userId;
 		private $userType;
+		private $myrsqli;
 
-		function __construct($userId = 0, $userType = 0)
+		function __construct($mysqli, $userId = 0, $userType = 0)
 		{
+			$this->mysqli = $mysqli;
 			$this->userId = $userId;
 			$this->userType = $userType;
 		}
@@ -21,14 +23,14 @@
 		function logIn($log, $pas)
 		{
 			//поиск в 3х таблицах логина и пароля
-			$chkResult = mysql_query("SELECT * FROM students WHERE  log = '$log' and pas = '$pas'");
-			if (!mysql_num_rows($chkResult))
+			$chkResult = $this->mysqli->query("SELECT * FROM students WHERE  log = '$log' and pas = '$pas'");
+			if (!mysqli_num_rows($chkResult))
 			{
-				$chkResult = mysql_query("SELECT * FROM teachers WHERE  log = '$log' and pas = '$pas'");
-				if (!mysql_num_rows($chkResult))
+				$chkResult = $this->mysqli->query("SELECT * FROM teachers WHERE  log = '$log' and pas = '$pas'");
+				if (!mysqli_num_rows($chkResult))
 				{
-					$chkResult = mysql_query("SELECT * FROM administrators WHERE  log = '$log' and pas = '$pas'");
-					if (!mysql_num_rows($chkResult)) 
+					$chkResult = $this->mysqli->query("SELECT * FROM administrators WHERE  log = '$log' and pas = '$pas'");
+					if (!mysqli_num_rows($chkResult)) 
 					{
 						$_SESSION['userId'] = 0;
 						$_SESSION['userType'] = 0;
@@ -36,19 +38,19 @@
 					}
 					else
 					{
-						$this->userId = mysql_result($chkResult, 0, "admin_id");
+						$this->userId = $this->mysqli->result($chkResult, 0, "admin_id");
 						$this->userType = 3;
 					}
 				}
 				else
 				{
-					$this->userId = mysql_result($chkResult, 0, "teacher_id");
+					$this->userId = $this->mysqli->result($chkResult, 0, "teacher_id");
 					$this->userType = 2;
 				}
 			}
 			else
 			{
-				$this->userId = mysql_result($chkResult, 0, "student_id");
+				$this->userId = $this->mysqli->result($chkResult, 0, "student_id");
 				$this->userType = 1;
 			}
 						
@@ -56,20 +58,14 @@
 			$_SESSION['userType'] = $this->userType;
 
 			//возвращаем тип пользователя			
-			return 1;
+			//return 1;
 		}
 
 		function logOut()
 		{
-			//проверка на сесию. очистка сессии
-			//переход на главную страницу
-			if($_SESSION['adminstrator']) 
-				unset($_SESSION['adminstrator']);
-			else 
-				if ($_SESSION['user'])
-					unset($_SESSION['user']);
-				else 
-				die ("Вы не авторизировались!");
+			unset($_SESSION['userId']);
+			unset($_SESSION['userType']);
+			
 			header('location: index.php');
 		}
 	}

@@ -1,6 +1,3 @@
-<?php
-	$teacher = new teacherMainMenu($_SESSION['userId']);
-?>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="../../css/elements.css">
@@ -18,10 +15,10 @@
 			</div>
 			<div class="topContent">
 				<span class="topDateTimeFio">
-					<?php echo "Здравствуйте, <i>".$teacher->getFIO()."</i>. Сегодня <i>".date("d.m.Y")."</i>"; ?>
+					<?php echo "Здравствуйте, <i>".$this->getFIO()."</i>. Сегодня <i>".date("d.m.Y")."</i>"; ?>
 				</span>
 				<span class="topBtn">
-					<div class="topButton"><span class="topButtonText">Выход</span><img src="../../svgs/exitArrow.svg"></div>
+					<div onClick="document.location='?exit=1'" class="topButton"><span class="topButtonText">Выход</span><img src="../../svgs/exitArrow.svg"></div>
 				</span>
 				<div class="topActions">					
 					<div id="searchBtn" class="searchButton"><span class="topButtonText">Поиск</span><img src="../../svgs/search.svg"></div>

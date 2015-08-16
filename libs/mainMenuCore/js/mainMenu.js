@@ -18,9 +18,15 @@ function onResponse(d)
 							<span class="topButtonText">Изменить</span>
 							<img src="../../svgs/edit.svg">
 						</div>
-					</span>
+					</span>					
 					<span class="topBtn">
 						<div class="controlButton" style="top:0px; position:relative;">
+							<span class="topButtonText">Cведения</span>
+							<img src="../../svgs/info.svg">
+						</div>
+					</span>
+					<span class="topBtn">
+						<div  onClick="RemoveTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
 							<span class="topButtonText">Удалить</span>
 							<img src="../../svgs/delete.svg">
 						</div>
@@ -30,4 +36,16 @@ function onResponse(d)
 	}  
 }
 
- 
+function RemoveTheme(obj, themeId)
+{
+	$.ajax({
+	  type: "GET",
+	  url: "http://textbooks/",
+	  data: "removeTheme="+themeId,
+	  success: function(msg){
+	    alert( msg );
+	    $(obj).parents("div.objBox").remove();
+	  }
+	});
+}
+
