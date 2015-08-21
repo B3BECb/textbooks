@@ -14,6 +14,7 @@ select, input, .button, .checkbox label:after, textarea
   width: 7em;
   height: 2em;
   transition: 0.5s;
+  box-shadow: 0px 0px 3px #868686;
 }
 .button, .upload_visible_div, .colorSelect, .checkbox
 {
@@ -261,6 +262,8 @@ input[type=text]
   overflow: hidden;  
   border-radius: 40px;
   border: 1px solid rgb(170, 167, 192);
+  border-color: #979C88;
+  box-shadow: 0px 1px 10px #929292;
 }
 .modalWindow .content
 {
@@ -292,6 +295,7 @@ input[type=text]
   padding-bottom: 5;
   width: 103%;
   left: -7px;
+  box-shadow: 0px 0px 10px #607882;
 }
 .modalWindowPageBg
 {
@@ -302,6 +306,10 @@ input[type=text]
   background: rgb(0, 0, 0);
   top: 0;
   opacity: 0.3;
+}
+.themeInfoContent
+{
+  text-align: left;
 }
 
 

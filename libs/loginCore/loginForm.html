@@ -3,26 +3,40 @@
 		<link rel="stylesheet" type="text/css" href="../../css/elements.css">
 		<style type="text/css">
 		</style>
+		<script type="text/javascript" src="../../js/jquery/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript">
+		function logIn () 
+		{
+			$.ajax({
+			  type: "POST",
+			  url: "http://textbooks/",
+			  data: "log="+log.value+"&pas="+pas.value,
+			  success: function(msg){
+			  	if (msg) location.reload(); else alert("Неверно введен логин или пароль");
+			  }
+			});
+		}
+		</script>
 	</head>
 	<body>
 		<div class="modalContainer">
 			<div class="modalWindow" style="height:160;">
 				<div class="modalWindowBg" style="background: #B8D5EC;"></div>
-				<form class="content" id="form1" action="index.php" method="POST">					
+				<div class="content">				
 					<div style="">
 						Логин<br>
-						<input name="log" type="text"/><br>
+						<input id="log" type="text"/><br>
 					</div>
 
 					<div style="">
 						Пароль<br>
-						<input name="pas" type="text"/><br>
+						<input id="pas" type="text"/><br>
 					</div>
 
 					<div style="">
-						<div class="button" onclick="form1.submit();"><span class="buttonText">Войти</span></div>
-					</div>					
-				</form>
+						<div class="button" onclick="logIn();"><span class="buttonText">Войти</span></div>
+					</div>
+				</div>
 			</div>
 		<div>
 	</body>

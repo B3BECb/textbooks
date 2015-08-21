@@ -2,7 +2,8 @@ function onResponse(d)
 {  
 	eval('var obj = ' + d + ';');  
 	alert(obj.message); 
-	if(obj.success != "0") {
+	if(obj.success != "0") 
+	{
 		objectsBody.innerHTML += 
 			`<div class="objBox">
 				<img class="objImg" src=`+obj.themeIMG+`>
@@ -20,7 +21,7 @@ function onResponse(d)
 						</div>
 					</span>					
 					<span class="topBtn">
-						<div class="controlButton" style="top:0px; position:relative;">
+						<div  onClick="ThemeInfo(`+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
 							<span class="topButtonText">Cведения</span>
 							<img src="../../svgs/info.svg">
 						</div>
@@ -33,6 +34,7 @@ function onResponse(d)
 					</span>
 				</div>
 			</div>`
+		$('#addThemeModalWindow').hide();
 	}  
 }
 
@@ -45,6 +47,24 @@ function RemoveTheme(obj, themeId)
 	  success: function(msg){
 	    alert( msg );
 	    $(obj).parents("div.objBox").remove();
+	  }
+	});
+}
+
+function ThemeInfo(themeId)
+{
+	$.ajax({
+	  type: "GET",
+	  url: "http://textbooks/",
+	  data: "getThemeInfo="+themeId,
+	  success: function(msg){
+	  	eval('var obj = ' + msg + ';');
+	    
+	    for (var i = 1; i < themeInfoContent.children.length-1; i++) {	    		    	
+	    	themeInfoContent.children[i].innerHTML = obj[i];	    	
+	    };
+
+		$('#ThemeInfo').show()
 	  }
 	});
 }

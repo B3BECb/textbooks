@@ -53,8 +53,7 @@
 						</div>
 						<div style="margin-top:10px;">
 							Описание темы<br>
-							<textarea name="newThemeDiscription" style=" width: 289px; height: 105px; resize: none;">
-							</textarea>
+							<textarea name="newThemeDiscription" style=" width: 289px; height: 105px; resize: none;"></textarea>							
 						</div>
 
 						<div style="margin-top:10px;">
@@ -78,6 +77,36 @@
 						</div>
 						<div style="margin-top:5px; height:5px;"></div>
 					</form>
+				</div>
+			</div>
+		</div>
+
+		<div id="ThemeInfo" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
+			<div class="modalWindowPageBg"></div>
+			<div class="modalWindow" style=" height: 370px; width: 370px;">
+				<div class="modalWindowBg" style="background: rgb(134, 177, 195);"></div>
+				<div id = "themeInfoContent" class="content">
+					<div class="modalWindowCaption">
+							Информация о теме
+					</div>
+					<div class = "themeInfoContent">
+						Кто создал
+					</div>
+					<div class = "themeInfoContent">
+						Название
+					</div>
+					<div class = "themeInfoContent">
+						Сколько учебников
+					</div>
+					<div class = "themeInfoContent">
+						Сколько презентаций
+					</div>
+					<div class = "themeInfoContent">
+						Описание
+					</div>					
+					<div class="button" onclick="$('#ThemeInfo').hide();">
+						<span class="buttonText">Вернуться</span>
+					</div>					
 				</div>
 			</div>
 		</div>

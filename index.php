@@ -10,23 +10,19 @@
 	/*вход и выход из системы*/
 	if (!$_SESSION['userId'])
 	{
-		$autorization = new AutClass($mysqli);
+		$autorization = new AutClass();
 		if($_POST['log'])
 		{	
 			$autorization->logIn($_POST['log'], $_POST['pas']);
 
 			switch ($_SESSION['userType']) {
-				case 0:
-					die ("Неверно введен логин или пароль");
-					break;
-
 				case 1:
 					echo "учен";
 					break;
 
 				case 2://учитель
-					$teacher = new teacherMainMenu($mysqli, $_SESSION['userId']);
-					$teacher->getMenu();
+					$teacher = new teacherMainMenu($_SESSION['userId']);
+					echo "1";
 					break;
 
 				case 3:
@@ -51,7 +47,7 @@
 					break;
 
 				case 2://учитель
-					$teacher = new teacherMainMenu($mysqli, $_SESSION['userId']);
+					$teacher = new teacherMainMenu($_SESSION['userId']);
 
 					if (empty($_GET) && empty($_POST)) //если нет запросов
 					{						
@@ -62,18 +58,22 @@
 					foreach ($_GET as $key => $value) //парсинг get запросов
 						switch ($key) {
 
+							case 'getThemeInfo':
+								$teacher->GetThemeInfo($_GET['getThemeInfo']);
+								return;
+
 							case 'removeTheme':
-								$teacher->RemoveTheme($_GET['removeTheme']); return;
-								break;	
+								$teacher->RemoveTheme($_GET['removeTheme']); 
+								return;
 
 							case 'exit':
-								$autorization = new AutClass($mysqli);
+								$autorization = new AutClass();
 								$autorization->logOut();
 								return;								
 
 							default:
 								$teacher->getMenu(); return;
-							break;
+								break;
 						}			
 
 					foreach ($_POST as $key => $value) //парсинг post запросов

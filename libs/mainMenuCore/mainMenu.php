@@ -1,4 +1,36 @@
 <?php
+
+	/**
+	* Класс представления информации о теме
+	*/
+	class Theme 
+	{	
+		private $autorId;
+		public $AutorFIO;	
+		public $Caption;
+		public $Discription;
+		public $LessonsCount;
+		public $PresentationsCount;
+
+		function __construct($id)
+		{
+			$mysqli = $GLOBALS['mysqli'];
+
+			$autor = $mysqli->query("SELECT teacher_id, fio FROM teachers WHERE teacher_id = (SELECT teacher_id_fk FROM themes WHERE theme_id = $id)");
+			$this->AutorId = $mysqli->result($autor, 0,"teacher_id");
+			$this->AutorFIO = $mysqli->result($autor, 0,"fio");
+
+			$theme = $mysqli->query("SELECT themeName, discription FROM themes WHERE theme_id = $id");
+			$this->Caption = $mysqli->result($theme, 0, "themeName");
+			$discription = $mysqli->result($theme, 0, "discription");
+			$this->Discription = ( empty($discription ) ) ? "нет" : $discription;
+
+			//$additionalThemeinfo = $mysqli->query();
+			$this->LessonsCount = 0/*$mysqli->result($additionalThemeinfo, 0)*/;
+			$this->PresentationsCount = 0/*$mysqli->result($additionalThemeinfo, 0)*/;
+		}
+	}
+
 	/**
 	* Родительский класс пользователей
 	*/
@@ -6,7 +38,6 @@
 	{		
 		private $id;
 		private $fio;
-		private $mysqli;
 
 		function jsOnResponse($obj)  //ответ сервера
 		{  
@@ -18,8 +49,7 @@
 		}
 
 		function removeDirectory($dir) 
-		{
-			
+		{			
 			if ($objs = glob($dir."/*")) 
 			{
 				foreach($objs as $obj) 
@@ -29,6 +59,12 @@
 			}
 			rmdir($dir);
 		}
+
+		function GetThemeInfo($theme_id)
+		{
+			$theme = new Theme($theme_id);
+			echo "{'2':'Автор: ".$theme->AutorFIO."','1':`Название темы: ".$theme->Caption."`,'5':`Описание: ".$theme->Discription."`,'3':'Количество учебников: ".$theme->LessonsCount."','4':'Количество презентаций: ".$theme->PresentationsCount."'}";
+		}
 	}
 
 	/**
@@ -36,15 +72,14 @@
 	*/
 	class teacherMainMenu extends user
 	{
-		function __construct($mysqli, $teacherId)
+		function __construct($teacherId)
 		{
-			$this->mysqli = $mysqli;
-
 			$this->id = $teacherId;
+			$mysqli = $GLOBALS['mysqli'];
 
 			//Получаем доп. информацию о учителе
-			$teacherFio = $this->mysqli->query("SELECT fio FROM teachers WHERE teacher_id = $this->id");
-			$this->fio = $this->mysqli->result($teacherFio, 0);
+			$teacherInfo = $mysqli->query("SELECT fio FROM teachers WHERE teacher_id = $this->id");
+			$this->fio = $mysqli->result($teacherInfo, 0);
 		}
 
 		function getMenu()
@@ -59,8 +94,10 @@
 
 		function getThemes()
 		{
+			global $mysqli;
+
 			//выбрать все темы, где владелец этот учитель
-			$teacherThemes = $this->mysqli->query("SELECT theme_id, themeName, discription, img FROM themes WHERE teacher_id_fk = 1");
+			$teacherThemes = $mysqli->query("SELECT theme_id, themeName, discription, img FROM themes WHERE teacher_id_fk = ".$this->id);
 			if(!mysqli_num_rows($teacherThemes)) return;
 
 			while($theme = mysqli_fetch_array($teacherThemes))
@@ -81,7 +118,7 @@
 						</div>
 					</span>
 					<span class="topBtn">
-						<div id="theme_'.$theme['theme_id'].'" class="controlButton" style="top:0px; position:relative;">
+						<div onClick="ThemeInfo('.$theme['theme_id'].');" class="controlButton" style="top:0px; position:relative;">
 							<span class="topButtonText">Cведения</span>
 							<img src="../../svgs/info.svg">
 						</div>
@@ -111,9 +148,11 @@
 					if ($ExtentionsClassificator->classificate($extention) != "pics") throw new Exception("Недопустимое расширение файла($extention)."); 
 				}
 
+				global $mysqli;
+
 				//заносим новую тему в БД
-				$this->mysqli->query("INSERT INTO themes values (null, '$themeName', $this->id, '$themeDiscription', '".$themeIMG['name']."')");
-				$lastInsertId = $this->mysqli->insert_id;
+				$mysqli->query("INSERT INTO themes values (null, '$themeName', $this->id, '$themeDiscription', '".$themeIMG['name']."')");
+				$lastInsertId = $mysqli->insert_id;
 
 				//Создать новую директорию темы
 				mkdir("themes/theme_$lastInsertId");
@@ -138,8 +177,10 @@
 
 		function RemoveTheme($themeId)
 		{
+			global $mysqli;
+
 			$this->removeDirectory("themes/theme_$themeId");
--			$this->mysqli->query("DELETE FROM themes WHERE theme_id = $themeId;");
+-			$mysqli->query("DELETE FROM themes WHERE theme_id = $themeId;");
 
 			echo "Тема удалена.";
 		}
