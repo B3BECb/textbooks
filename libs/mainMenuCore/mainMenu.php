@@ -63,7 +63,7 @@
 		function GetThemeInfo($theme_id)
 		{
 			$theme = new Theme($theme_id);
-			echo "{'2':'Автор: ".$theme->AutorFIO."','1':`Название темы: ".$theme->Caption."`,'5':`Описание: ".$theme->Discription."`,'3':'Количество учебников: ".$theme->LessonsCount."','4':'Количество презентаций: ".$theme->PresentationsCount."'}";
+			echo "{'2':'<b>Автор:</b> ".$theme->AutorFIO."','1':`<b>Название темы:</b> ".$theme->Caption."`,'5':`<b>Описание:</b> ".$theme->Discription."`,'3':'<b>Количество учебников:</b> ".$theme->LessonsCount."','4':'<b>Количество презентаций:</b> ".$theme->PresentationsCount."'}";
 		}
 	}
 
@@ -107,12 +107,10 @@
 				<div class="objName"> 
 					<span class="name">'.$theme['themeName'].'</span>
 				</div>	
-				<div class="objDiscription">
-					'.$theme['discription'].' 
-				</div>			
+				<div class="objDiscription">'.$theme['discription'].'</div>			
 				<div class="objControls">
 					<span class="topBtn">
-						<div class="controlButton" style="top:0px; position:relative;">
+						<div onClick="EditTheme(this, '.$theme['theme_id'].');" class="controlButton" style="top:0px; position:relative;">
 							<span class="topButtonText">Изменить</span>
 							<img src="../../svgs/edit.svg">
 						</div>

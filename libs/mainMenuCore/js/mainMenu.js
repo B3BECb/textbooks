@@ -10,12 +10,10 @@ function onResponse(d)
 				<div class="objName"> 
 					<span class="name">`+obj.themeName+`</span>
 				</div>	
-				<div class="objDiscription">
-					`+obj.themeDiscription+` 
-				</div>			
+				<div class="objDiscription">`+obj.themeDiscription+`</div>			
 				<div class="objControls">
 					<span class="topBtn">
-						<div class="controlButton" style="top:0px; position:relative;">
+						<div onClick="EditTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
 							<span class="topButtonText">Изменить</span>
 							<img src="../../svgs/edit.svg">
 						</div>
@@ -61,7 +59,7 @@ function ThemeInfo(themeId)
 	  	eval('var obj = ' + msg + ';');
 	    
 	    for (var i = 1; i < themeInfoContent.children.length-1; i++) {	    		    	
-	    	themeInfoContent.children[i].innerHTML = obj[i];	    	
+	    	themeInfoContent.children[i].innerHTML = obj[i];	    		    	
 	    };
 
 		$('#ThemeInfo').show()
@@ -69,3 +67,15 @@ function ThemeInfo(themeId)
 	});
 }
 
+function EditTheme (obj, themeId) {
+	editThemeInput.value = themeId;
+
+	var objElement = $(obj).parents("div.objBox").find($(".name")).get(0)
+	var destinationElement = $('input[name=editThemeName]').get(0)
+	destinationElement.value = objElement.textContent
+
+	var objElement = $(obj).parents("div.objBox").find($(".objDiscription")).get(0)
+	var destinationElement = $('textarea[name=editThemeDiscription]').get(0)
+	destinationElement.value = objElement.textContent
+	$('#editTheme').show();
+}
