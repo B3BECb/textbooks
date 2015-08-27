@@ -182,5 +182,16 @@
 
 			echo "Тема удалена.";
 		}
+
+		function EditTheme($themeId, $themeName, $discription, $img )
+		{
+			//заменить параметры темы с id
+			$mysqli = $GLOBALS['mysqli'];
+			echo $themeId  ." ". $themeName  ." ". $discription;
+			print_r($img);
+			//$mysqli->query("UPDATE themes SET themeName = $themeName, discription = $discription, img = $img WHERE theme_id = $themeId");
+//https://youtu.be/qo7Hqwypwcc?list=PLtjuvkyFrt5Wjd-973N117XS7xuuoD6XM&t=1743
+			//выдать ответ
+		}
 	}
 ?>

@@ -66,6 +66,10 @@
 								$teacher->RemoveTheme($_GET['removeTheme']); 
 								return;
 
+							case 'editTheme':								
+								$teacher->EditTheme($_GET['editTheme'], $_GET['editThemeName'], $_GET['editThemeDiscription'], ($_GET['editThemePict']) ? $_FILES['upload'] : "");
+								return;
+
 							case 'exit':
 								$autorization = new AutClass();
 								$autorization->logOut();
