@@ -83,6 +83,10 @@
 								return;
 							break;
 
+							case 'editTheme':								
+								$teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], ($_POST['editThemePict']) ? $_FILES['upload'] : "");
+								return;
+
 							default:
 								$teacher->getMenu(); return;
 							break;

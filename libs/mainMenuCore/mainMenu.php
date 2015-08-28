@@ -182,5 +182,63 @@
 
 			echo "Тема удалена.";
 		}
+
+		function EditTheme($themeId, $themeName, $discription, $img )
+		{
+			//заменить параметры темы с id
+
+			try 
+			{
+				if (empty($themeName)) throw new Exception("Недопустимое название темы.");
+			
+				global $mysqli;
+
+				if ($img['tmp_name'])
+				{
+					$ExtentionsClassificator = new extensionClassificator();
+					$extention = pathinfo($img['name'], PATHINFO_EXTENSION);
+					if ($ExtentionsClassificator->classificate($extention) != "pics") throw new Exception("Недопустимое расширение файла($extention)."); 
+					
+					//замена/ удалить закачать
+					$name = $mysqli->result($mysqli->query("SELECT img FROM themes WHERE theme_id = $themeId"), 0);					
+					unlink("themes/theme_$themeId/$img");
+
+					$dir = "themes/theme_$themeId"; // путь к каталогу загрузок на сервере			
+					$name = basename($img['name']);//имя файла и расширение
+					$file = "$dir/$name";//полный путь к файлу				
+
+					if (!($success = move_uploaded_file($img['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
+
+					$mysqli->query("UPDATE themes SET themeName = '$themeName', discription = '$discription' img = '".$img['name']."' WHERE theme_id = $themeId");
+echo $themeId  ." ". $themeName  ." *". $discription;
+				}
+				else
+				if (empty($img))
+				{
+					//картинка не заменяется. запрос на апдейт
+					$mysqli->query("UPDATE themes SET themeName = '$themeName', discription = '$discription' WHERE theme_id = $themeId");
+					
+					//вернуть тему
+				}
+				else
+				{
+					//удаление
+					$name = $mysqli->result($mysqli->query("SELECT img FROM themes WHERE theme_id = $themeId"), 0);
+					$mysqli->query("UPDATE themes SET themeName = '$themeName', discription = '$discription' img = '' WHERE theme_id = $themeId");					
+					unlink("themes/theme_$themeId/$img");
+					echo $themeId  ." ". $themeName  ." ***". $discription;
+				}
+
+			
+			
+			} 
+			catch (Exception $e) 
+			{
+				$this->jsOnResponse("{'message':'Ошибка изменения темы! ".$e->getMessage()."', 'success':'0'}");	
+			}
+			//$mysqli->query("UPDATE themes SET themeName = $themeName, discription = $discription, img = $img WHERE theme_id = $themeId");
+//https://youtu.be/qo7Hqwypwcc?list=PLtjuvkyFrt5Wjd-973N117XS7xuuoD6XM&t=1743
+			//выдать ответ
+		}
 	}
 ?>
