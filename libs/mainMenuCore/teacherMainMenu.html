@@ -137,14 +137,14 @@
 						<div style="margin-top:10px;">
 							Картинка темы
 							<div style="text-align: initial;">
-								<input type="file" name="upload" id="upload_hidden"
+								<input type="file" name="upload" id="upload_hidden2"
 					        	style="position: absolute; display: table; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
-					        	onchange="document.getElementById('upload1').innerHTML = this.files[0].name;" />
-						      	<div style="background: rgba(224, 224, 224, 0.27);" onclick="if(check.checked)document.getElementById('upload_hidden').click();" class="button" id="uploadImgBtn">
+					        	onchange="document.getElementById('upload2').innerHTML = this.files[0].name;" />
+						      	<div style="background: rgba(224, 224, 224, 0.27);" onclick="if(check.checked) upload_hidden2.click();" class="button" id="uploadImgBtn">
 						      		<span class="buttonText">Обзор</span>      		
 						      	</div>
 						      	<div class="upload_visible_div">
-						      		<label id ="upload1" class="upload_visible" onclick="if(check.checked)document.getElementById('upload_hidden').click();">Выберите файл.</label>
+						      		<label id ="upload2" class="upload_visible" onclick="if(check.checked) upload_hidden2.click();">Выберите файл.</label>
 						      	</div>	      			
 							</div>
 						</div>

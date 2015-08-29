@@ -4,35 +4,44 @@ function onResponse(d)
 	alert(obj.message); 
 	if(obj.success != "0") 
 	{
-		objectsBody.innerHTML += 
-			`<div class="objBox">
-				<img class="objImg" src=`+obj.themeIMG+`>
-				<div class="objName"> 
-					<span class="name">`+obj.themeName+`</span>
-				</div>	
-				<div class="objDiscription">`+obj.themeDiscription+`</div>			
-				<div class="objControls">
-					<span class="topBtn">
-						<div onClick="EditTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
-							<span class="topButtonText">Изменить</span>
-							<img src="../../svgs/edit.svg">
+		switch (obj.type)
+		{
+			case "create":
+				objectsBody.innerHTML += 
+					`<div class="objBox">
+						<img class="objImg" src=`+obj.themeIMG+`>
+						<div class="objName"> 
+							<span class="name">`+obj.themeName+`</span>
+						</div>	
+						<div class="objDiscription">`+obj.themeDiscription+`</div>			
+						<div class="objControls">
+							<span class="topBtn">
+								<div onClick="EditTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
+									<span class="topButtonText">Изменить</span>
+									<img src="../../svgs/edit.svg">
+								</div>
+							</span>					
+							<span class="topBtn">
+								<div  onClick="ThemeInfo(`+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
+									<span class="topButtonText">Cведения</span>
+									<img src="../../svgs/info.svg">
+								</div>
+							</span>
+							<span class="topBtn">
+								<div  onClick="RemoveTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
+									<span class="topButtonText">Удалить</span>
+									<img src="../../svgs/delete.svg">
+								</div>
+							</span>
 						</div>
-					</span>					
-					<span class="topBtn">
-						<div  onClick="ThemeInfo(`+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
-							<span class="topButtonText">Cведения</span>
-							<img src="../../svgs/info.svg">
-						</div>
-					</span>
-					<span class="topBtn">
-						<div  onClick="RemoveTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
-							<span class="topButtonText">Удалить</span>
-							<img src="../../svgs/delete.svg">
-						</div>
-					</span>
-				</div>
-			</div>`
-		$('#addThemeModalWindow').hide();
+					</div>`
+				$('#addThemeModalWindow').hide();
+			break;
+
+			case "edit":
+				alert(13213);
+			break;
+		}
 	}  
 }
 
