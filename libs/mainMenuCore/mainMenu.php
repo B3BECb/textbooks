@@ -102,7 +102,7 @@
 
 			while($theme = mysqli_fetch_array($teacherThemes))
 			{
-				echo '<div class="objBox">
+				echo '<div class="objBox" id="Theme_'.$theme['theme_id'].'">
 				<img class="objImg" src='.(($theme['img'])?('themes/theme_'.$theme['theme_id'].'/'.$theme['img']):'').'>
 				<div class="objName"> 
 					<span class="name">'.$theme['themeName'].'</span>
@@ -195,7 +195,7 @@
 
 				$name = $mysqli->result($mysqli->query("SELECT img FROM themes WHERE theme_id = $themeId"), 0);
 				$dir = "themes/theme_$themeId"; // путь к каталогу загрузок на сервере
-
+				$file = ($name) ? "$dir/$name" : "";//полный путь к файлу
 
 				if ($img['tmp_name'])
 				{
@@ -203,13 +203,14 @@
 					$extention = pathinfo($img['name'], PATHINFO_EXTENSION);
 					if ($ExtentionsClassificator->classificate($extention) != "pics") throw new Exception("Недопустимое расширение файла($extention)."); 					
 			
+					$oldName = $name;
 					$name = basename($img['name']);//имя файла и расширение
 					$file = "$dir/$name";//полный путь к файлу				
 
 					if (!($success = move_uploaded_file($img['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
 
 					//замена = закачать -> удалить 	
-					@unlink("themes/theme_$themeId/$name");
+					@unlink("themes/theme_$themeId/$oldName");
 
 					$mysqli->query("UPDATE themes SET themeName = '$themeName', discription = '$discription', img = '".$img['name']."' WHERE theme_id = $themeId");
 
@@ -227,7 +228,6 @@
 					@unlink("themes/theme_$themeId/$name");
 				}
 
-				$file = "$dir/$name";//полный путь к файлу
 				$this->jsOnResponse("{'type':'edit', 'message':'Тема изменена.', 'success':'1', 'themeId':'$themeId', 'themeName':`$themeName`, 'themeDiscription':`$discription`, 'themeIMG':'$file'}");
 			
 			} 

@@ -8,7 +8,7 @@ function onResponse(d)
 		{
 			case "create":
 				objectsBody.innerHTML += 
-					`<div class="objBox">
+					`<div class="objBox" id="Theme_`+obj.themeId+`">
 						<img class="objImg" src=`+obj.themeIMG+`>
 						<div class="objName"> 
 							<span class="name">`+obj.themeName+`</span>
@@ -39,7 +39,12 @@ function onResponse(d)
 			break;
 
 			case "edit":
-				alert(13213);
+				var objElement = $("#Theme_"+obj.themeId).find($(".objImg")).get(0)
+				objElement.src = obj.themeIMG
+				var objElement = $("#Theme_"+obj.themeId).find($(".name")).get(0)
+				objElement.textContent = obj.themeName
+				var objElement = $("#Theme_"+obj.themeId).find($(".objDiscription")).get(0)
+				objElement.textContent = obj.themeDiscription				
 			break;
 		}
 	}  
