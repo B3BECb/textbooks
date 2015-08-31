@@ -104,10 +104,10 @@
 			{
 				echo '<div class="objBox" id="Theme_'.$theme['theme_id'].'">
 				<img class="objImg" src='.(($theme['img'])?('themes/theme_'.$theme['theme_id'].'/'.$theme['img']):'').'>
-				<div class="objName"> 
+				<div class="objName" onClick="location.href=`?theme='.$theme['theme_id'].'`"> 
 					<span class="name">'.$theme['themeName'].'</span>
 				</div>	
-				<div class="objDiscription">'.$theme['discription'].'</div>			
+				<div class="objDiscription" onClick="location.href=`?theme='.$theme['theme_id'].'`">'.$theme['discription'].'</div>			
 				<div class="objControls">
 					<span class="topBtn">
 						<div onClick="EditTheme(this, '.$theme['theme_id'].');" class="controlButton" style="top:0px; position:relative;">
@@ -235,9 +235,16 @@
 			{
 				$this->jsOnResponse("{'message':'Ошибка изменения темы! ".$e->getMessage()."', 'success':'0'}");	
 			}
-			//$mysqli->query("UPDATE themes SET themeName = $themeName, discription = $discription, img = $img WHERE theme_id = $themeId");
-//https://youtu.be/qo7Hqwypwcc?list=PLtjuvkyFrt5Wjd-973N117XS7xuuoD6XM&t=1743
-			//выдать ответ
+			//Заменить все формы на аякс
+			//https://youtu.be/qo7Hqwypwcc?list=PLtjuvkyFrt5Wjd-973N117XS7xuuoD6XM&t=1743			
 		}
+
+		/*                    --------Уроки и презентации--------                        */
+
+		function getLessonsMenu()
+		{
+			include "teacherLessonsMenu.html";
+		} 
+
 	}
 ?>
