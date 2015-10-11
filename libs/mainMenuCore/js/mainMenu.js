@@ -11,9 +11,9 @@ function onResponse(d)
 					`<div class="objBox" id="Theme_`+obj.themeId+`">
 						<img class="objImg" src=`+obj.themeIMG+`>
 						<div class="objName"> 
-							<span class="name">`+obj.themeName+`</span>
+							<span class="name" onClick="location.href='index.php?theme=`+obj.themeId+`'">`+obj.themeName+`</span>
 						</div>	
-						<div class="objDiscription">`+obj.themeDiscription+`</div>			
+						<div class="objDiscription" onClick="location.href='index.php?theme=`+obj.themeId+`'">`+obj.themeDiscription+`</div>			
 						<div class="objControls">
 							<span class="topBtn">
 								<div onClick="EditTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
@@ -92,4 +92,23 @@ function EditTheme (obj, themeId) {
 	var destinationElement = $('textarea[name=editThemeDiscription]').get(0)
 	destinationElement.value = objElement.textContent
 	$('#editTheme').show();
+}
+
+/*                    --------Уроки и презентации--------                        */
+//Новый урок или презентация
+function newLesson (form) 
+{
+	var formData = new FormData($(form)[0]);
+
+    $.ajax( {
+      url: 'http://textbooks/',
+      type: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (msg) 
+      {
+      	alert(msg);
+      }
+    } );
 }

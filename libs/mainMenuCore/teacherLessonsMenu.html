@@ -15,7 +15,10 @@
 			</div>
 			<div class="topContent">
 				<span class="topDateTimeFio">
-					<?php echo "Здравствуйте, <i>".$this->getFIO()."</i>. Здесь представлены ваши темы. Сегодня <i>".date("d.m.Y")."</i>"; ?>
+					<?php echo "<i>".$this->getFIO()."</i>, здесь представлены ваши уроки и презентации. Сегодня <i>".date("d.m.Y")."</i>"; ?>
+				</span>
+				<span class="topBtn">
+					<div onClick="document.location='?'" class="topButton" style="left: 10px; right: initial;"><span class="topButtonText">Темы</span><img src="../../svgs/exitArrow.svg"></div>
 				</span>
 				<span class="topBtn">
 					<div onClick="document.location='?exit=1'" class="topButton"><span class="topButtonText">Выход</span><img src="../../svgs/exitArrow.svg"></div>
@@ -33,30 +36,37 @@
 
 		<div id="objectsBody" style="  margin-top: 30px; position: absolute;">
 
-			<?php echo $this->getThemes(); ?>			
+			<?php //; ?>			
 
 		</div>
 
 		<div id="addThemeModalWindow" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
 			<div class="modalWindowPageBg"></div>
-			<div class="modalWindow" style=" height: 370px; width: 370px;">
+			<div class="modalWindow" style=" height: 420px; width: 370px;">
 				<div class="content">
-					<form action="../../index.php" method="POST" target="rFrame" enctype="multipart/form-data" id="newTheme">
+					<form onsubmit="newLesson(this);return false;" id="newTheme">
 						<div class="modalWindowCaption">
-							Новая тема
+							Содать урок/презентацию
+						</div>
+<input name="sayHello" type="hidden" value="1"/>
+						<div style="margin-top:10px;">
+							Название<br>
+							<input name="newLessonName" type="text"/><br>
+						</div>
+						<div style="margin-top:10px;">
+							Описание<br>
+							<textarea name="newLessonDiscription" style=" width: 289px; height: 105px; resize: none;"></textarea>							
 						</div>
 
 						<div style="margin-top:10px;">
-							Название темы<br>
-							<input name="newThemeName" type="text"/><br>
-						</div>
-						<div style="margin-top:10px;">
-							Описание темы<br>
-							<textarea name="newThemeDiscription" style=" width: 289px; height: 105px; resize: none;"></textarea>							
+							<select name="lessonType">
+						        <option value="">Урок</option>
+						        <option value="1">Презентация</option>
+						    </select>
 						</div>
 
 						<div style="margin-top:10px;">
-							Обложка темы
+							Обложка
 							<div style="text-align: initial;">
 								<input type="file" name="upload" id="upload_hidden"
 					        	style="position: absolute; display: table; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
@@ -71,7 +81,7 @@
 						</div>
 
 						<div style="margin-top:10px;">
-							<div class="button" onclick="newTheme.submit();"><span class="buttonText">Создать</span></div>
+							<div class="button" onclick="$('#newTheme').submit();"><span class="buttonText">Создать</span></div>
 							<div class="button" onclick="$('#addThemeModalWindow').hide();"><span class="buttonText">Отмена</span></div>
 						</div>
 						<div style="margin-top:5px; height:5px;"></div>
@@ -150,7 +160,7 @@
 						</div>
 
 						<div style="margin-top:10px;">
-							<div class="button" onclick="editThemeForm.submit();"><span class="buttonText">Изменить</span></div>
+							<div class="button" onclick=""><span class="buttonText">Изменить</span></div>
 							<div class="button" onclick="$('#editTheme').hide();"><span class="buttonText">Отмена</span></div>
 						</div>
 						<div style="margin-top:5px; height:5px;"></div>

@@ -62,18 +62,22 @@
 								$teacher->GetThemeInfo($_GET['getThemeInfo']);
 								return;
 
-							case 'removeTheme':
-								$teacher->RemoveTheme($_GET['removeTheme']); 
+							case 'theme':
+								$teacher->getLessonsMenu();
 								return;
 
-							case 'editTheme':								
-								$teacher->EditTheme($_GET['editTheme'], $_GET['editThemeName'], $_GET['editThemeDiscription'], ($_GET['editThemePict']) ? $_FILES['upload'] : "");
+							case 'removeTheme':
+								$teacher->RemoveTheme($_GET['removeTheme']); 
 								return;
 
 							case 'exit':
 								$autorization = new AutClass();
 								$autorization->logOut();
-								return;								
+								return;	
+
+							case 'sayHello':
+								echo "Hi! I'm Get request";
+							return;							
 
 							default:
 								$teacher->getMenu(); return;
@@ -86,6 +90,10 @@
 								$teacher->newTheme($_POST['newThemeName'], $_POST['newThemeDiscription'], $_FILES['upload']);
 								return;
 							break;
+
+							case 'sayHello':
+								echo "Hi! I'm Post request";print_r($_FILES['upload']);
+							return;
 
 							case 'editTheme':								
 								$teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], ($_POST['editThemePict']) ? $_FILES['upload'] : "");
