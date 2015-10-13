@@ -5,11 +5,11 @@
 	require_once "libs/ExtentionsClassificator.php";
 	require_once "libs/ExtendedDefultClasses.php";
 
-	$mysqli = new ExtendedMysqli("localhost", "root", "", "textbooks") or die ("Could not connect to MySQL server!"); 
+	$mysqli = new ExtendedMysqli("localhost", "root", "admin", "textbooks") or die ("Could not connect to MySQL server!"); 
 	
 	/*вход и выход из системы*/
 	if (!$_SESSION['userId'])
-	{
+	{ 
 		$autorization = new AutClass();
 		if($_POST['log'])
 		{	

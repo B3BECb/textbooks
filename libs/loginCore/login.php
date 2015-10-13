@@ -23,6 +23,7 @@
 			global $mysqli;
 			//поиск в 3х таблицах логина и пароля
 			$chkResult = $mysqli->query("SELECT * FROM students WHERE  log = '$log' and pas = '$pas'");
+
 			if (!mysqli_num_rows($chkResult))
 			{
 				$chkResult = $mysqli->query("SELECT * FROM teachers WHERE  log = '$log' and pas = '$pas'");
