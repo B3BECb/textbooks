@@ -6,6 +6,7 @@
 	require_once "libs/ExtendedDefultClasses.php";
 
 	$mysqli = new ExtendedMysqli("localhost", "root", "admin", "textbooks") or die ("Could not connect to MySQL server!"); 
+	$mysqli->query("SET NAMES utf8");	
 	
 	/*вход и выход из системы*/
 	if (!$_SESSION['userId'])
