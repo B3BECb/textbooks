@@ -1,0 +1,30 @@
+<?php?>
+<div class="objBox" id=<?php echo "Theme_".$theme['theme_id'] ?>>
+	<img class="objImg" src=<?php echo (($theme['img'])?('themes/theme_'.$theme['theme_id'].'/'.$theme['img']):'') ?>>
+	<div class="objName" onClick="location.href='?theme=<?php echo $theme['theme_id'] ?>'"> 
+		<span class="name"><?php echo $theme['themeName'] ?></span>
+	</div>	
+	<div class="objDiscription" onClick="location.href='?theme=<?php echo $theme['theme_id'] ?>'">
+		<?php echo $theme['discription'] ?>
+	</div>			
+	<div class="objControls">
+		<span class="topBtn">
+			<div onClick="EditTheme(this, <?php echo $theme['theme_id'] ?>);" class="controlButton" style="top:0px; position:relative;">
+				<span class="topButtonText">Изменить</span>
+				<img src="../../svgs/edit.svg">
+			</div>
+		</span>
+		<span class="topBtn">
+			<div onClick="ThemeInfo(<?php echo $theme['theme_id'] ?>);" class="controlButton" style="top:0px; position:relative;">
+				<span class="topButtonText">Cведения</span>
+				<img src="../../svgs/info.svg">
+			</div>
+		</span>
+		<span class="topBtn">
+			<div onClick="RemoveTheme(this, <?php echo $theme['theme_id'] ?>);" class="controlButton" style="top:0px; position:relative;">
+				<span class="topButtonText">Удалить</span>
+				<img src="../../svgs/delete.svg">
+			</div>
+		</span>
+	</div>
+</div>

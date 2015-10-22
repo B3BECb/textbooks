@@ -1,7 +1,8 @@
 <?php
 	session_start();
 	require_once "libs/loginCore/login.php";
-	require_once "libs/mainMenuCore/mainMenu.php"; 
+	//require_once "libs/mainMenuCore/mainMenu.php"; 
+	require_once "libs/mainMenuCore/teacherLogick.php";
 	require_once "libs/ExtentionsClassificator.php";
 	require_once "libs/ExtendedDefultClasses.php";
 
@@ -96,7 +97,7 @@
 								echo "Hi! I'm Post request";print_r($_FILES['upload']);
 							return;
 
-							case 'editTheme':								
+							case 'editTheme':						
 								$teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], ($_POST['editThemePict']) ? $_FILES['upload'] : "");
 								return;
 
