@@ -23,13 +23,13 @@
 		public $FIO;
 		
 		function jsOnResponse($obj)  //ответ сервера
--		{  
--			echo ' 
--			<script type="text/javascript"> 
--			window.parent.onResponse("'.$obj.'");
--			</script> 
--			';  
--		}	
+		{  
+			echo ' 
+			<script type="text/javascript"> 
+			window.parent.onResponse("'.$obj.'");
+			</script> 
+			';  
+		}	
 		
 		function removeDirectory($dir) 
 		{			
@@ -48,7 +48,7 @@
 			global $mysqli;
 
 			$this->removeDirectory("themes/theme_$themeId");
--			$mysqli->query("DELETE FROM themes WHERE theme_id = $themeId;");
+			$mysqli->query("DELETE FROM themes WHERE theme_id = $themeId;");
 
 			echo "Тема удалена.";
 		}
@@ -68,48 +68,23 @@
 		{			
 			try
 			{
-				if (empty($themeName)) throw new Exception("Недопустимое название темы.");	
-
-				//проверка на валидность картинки			
-				if ($themeIMG['tmp_name'])
-				{
-					$ExtentionsClassificator = new extensionClassificator();
-					$extention = pathinfo($themeIMG['name'], PATHINFO_EXTENSION);
-					if ($ExtentionsClassificator->classificate($extention) != "pics") throw new Exception("Недопустимое расширение файла($extention)."); 
-				}
-
-				global $mysqli;
-
-				//заносим новую тему в БД
-				$mysqli->query("INSERT INTO themes values (null, '$themeName', $this->id, '$themeDiscription', '".$themeIMG['name']."')");
-				$lastInsertId = $mysqli->insert_id;
-
-				//Создать новую директорию темы
-				mkdir("themes/theme_$lastInsertId");
-
-				if ($themeIMG['tmp_name'])
-				{					
-					$dir = "themes/theme_$lastInsertId"; // путь к каталогу загрузок на сервере			
-					$name = basename($themeIMG['name']);//имя файла и расширение
-					$file = "$dir/$name";//полный путь к файлу				
-
-					if (!($success = move_uploaded_file($themeIMG['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
-
-				} else $success = 1;
+				$theme = new Theme;
+				$theme->newTheme($themeName, $themeDiscription = '', $themeIMG = '');
 			}
 			catch (Exception $e)
 			{
 				$this->jsOnResponse("{'message':'Ошибка создания темы! ".$e->getMessage()."', 'success':'0'}");
 			}						
 
-			if ($success) $this->jsOnResponse("{'type':'create', 'message':'Тема создана.', 'success':'1', 'themeId':'" . $lastInsertId . "', 'themeName':`$themeName`, 'themeDiscription':`$themeDiscription`, 'themeIMG':'$file'}");
+			//$this->jsOnResponse("{'type':'create', 'message':'Тема создjjана.', 'success':'1', 'themeId':'" . $theme . "', 'themeName':`$theme`, 'themeDiscription':`$theme`, 'themeIMG':'$theme'}");
+			echo json_encode($theme);
 		}
 	}
 
 	/**
-	* Класс представления информации о теме
+	* Класс темы
 	*/
-	class Theme 
+	class Theme implements JsonSerializable
 	{	
 		private $autorId;
 		public $AutorFIO;	
@@ -117,9 +92,49 @@
 		public $Discription;
 		public $LessonsCount;
 		public $PresentationsCount;
-
-		function __construct($id)
+		public $themeId;
+		public $themeIMG;
+		
+		function newTheme($themeName, $themeDiscription = '', $themeIMG = '')
 		{
+			if (empty($themeName)) throw new Exception("Недопустимое название темы.");	
+
+			//проверка на валидность картинки			
+			if ($themeIMG['tmp_name'])
+			{
+				$ExtentionsClassificator = new extensionClassificator();
+				$extention = pathinfo($themeIMG['name'], PATHINFO_EXTENSION);
+				if ($ExtentionsClassificator->classificate($extention) != "pics") throw new Exception("Недопустимое расширение файла($extention)."); 
+			}
+
+			global $mysqli;
+
+			//заносим новую тему в БД
+			$mysqli->query("INSERT INTO themes values (null, '$themeName', $this->id, '$themeDiscription', '".$themeIMG['name']."')");
+			$lastInsertId = $mysqli->insert_id;
+
+			//Создать новую директорию темы
+			mkdir("themes/theme_$lastInsertId");
+
+			if ($themeIMG['tmp_name'])
+			{					
+				$dir = "themes/theme_$lastInsertId"; // путь к каталогу загрузок на сервере			
+				$name = basename($themeIMG['name']);//имя файла и расширение
+				$file = "$dir/$name";//полный путь к файлу				
+
+				if (!($success = move_uploaded_file($themeIMG['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
+			}			
+				
+			$this->Caption			= $themeName;
+			$this->Discription	= $themeDiscription;
+			$this->themeId			= $lastInsertId;
+			$this->themeIMG		= $file;
+			 		
+		}
+		
+		function ThemeInfo($id)
+		{
+			
 			$mysqli = $GLOBALS['mysqli'];
 
 			$autor = $mysqli->query("SELECT teacher_id, fio FROM teachers WHERE teacher_id = (SELECT teacher_id_fk FROM themes WHERE theme_id = $id)");
