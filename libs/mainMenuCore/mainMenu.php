@@ -26,7 +26,7 @@
 		{  
 			echo ' 
 			<script type="text/javascript"> 
-			window.parent.onResponse("'.$obj.'");
+			window.parent.onResponse('.$obj.');
 			</script> 
 			';  
 		}	
@@ -69,7 +69,7 @@
 			try
 			{
 				$theme = new Theme;
-				$theme->newTheme($themeName, $themeDiscription = '', $themeIMG = '');
+				$theme->newTheme($this->id, $themeName, $themeDiscription = '', $themeIMG = '');
 			}
 			catch (Exception $e)
 			{
@@ -77,7 +77,7 @@
 			}						
 
 			//$this->jsOnResponse("{'type':'create', 'message':'Тема создjjана.', 'success':'1', 'themeId':'" . $theme . "', 'themeName':`$theme`, 'themeDiscription':`$theme`, 'themeIMG':'$theme'}");
-			echo json_encode($theme);
+			$this->jsOnResponse(json_encode($theme));
 		}
 	}
 
@@ -95,7 +95,7 @@
 		public $themeId;
 		public $themeIMG;
 		
-		function newTheme($themeName, $themeDiscription = '', $themeIMG = '')
+		function newTheme($userId, $themeName, $themeDiscription = '', $themeIMG = '')
 		{
 			if (empty($themeName)) throw new Exception("Недопустимое название темы.");	
 
@@ -110,7 +110,7 @@
 			global $mysqli;
 
 			//заносим новую тему в БД
-			$mysqli->query("INSERT INTO themes values (null, '$themeName', $this->id, '$themeDiscription', '".$themeIMG['name']."')");
+			$mysqli->query("INSERT INTO themes values (null, '$themeName', $userId, '$themeDiscription', '".$themeIMG['name']."')");
 			$lastInsertId = $mysqli->insert_id;
 
 			//Создать новую директорию темы
@@ -125,9 +125,9 @@
 				if (!($success = move_uploaded_file($themeIMG['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
 			}			
 				
-			$this->Caption			= $themeName;
+			$this->Caption		= $themeName;
 			$this->Discription	= $themeDiscription;
-			$this->themeId			= $lastInsertId;
+			$this->themeId		= $lastInsertId;
 			$this->themeIMG		= $file;
 			 		
 		}
@@ -150,6 +150,14 @@
 			$this->LessonsCount = 0/*$mysqli->result($additionalThemeinfo, 0)*/;
 			$this->PresentationsCount = 0/*$mysqli->result($additionalThemeinfo, 0)*/;
 		}
-	}
+
+                public function jsonSerialize() {
+                    return array('Caption' => $this->Caption,
+                                'Discription' => $this->Discription,
+                                'themeId' => $this->themeId,
+                                'themeIMG' => $this->themeIMG);
+                }
+
+            }
 	
 ?>
