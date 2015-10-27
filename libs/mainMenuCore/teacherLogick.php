@@ -30,8 +30,11 @@
 			if(!mysqli_num_rows($teacherThemes)) return;
 
 			while($theme = mysqli_fetch_array($teacherThemes))
-			{
-				include 'themeElement.htm';
+			{//создать тему и вывести
+                            $currentTheme = new Theme();
+                            $currentTheme->GetThemeConstruct($theme);
+                            $currentTheme->printTheme();
+                            //include 'themeElement.htm';
 			}
 		}		
 
