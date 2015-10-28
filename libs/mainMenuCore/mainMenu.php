@@ -104,7 +104,7 @@
                     $this->autorId      = $userId;
                     $this->themeIMG	= $themeIMG;
                     
-                    newTheme();
+                    $this->newTheme();
                 }
                 
                 function GetThemeConstruct($result)
@@ -167,9 +167,9 @@
 			$this->PresentationsCount = 0/*$mysqli->result($additionalThemeinfo, 0)*/;
 		}
                 
-                public function printTheme()
-                {
-                    return include 'themeElement.htm';
+                public function getElement()
+                {                  
+                   return include 'themeElement.htm';
                 }
 
                 public function jsonSerialize() {//выводить тему
@@ -177,7 +177,7 @@
                                 'Discription' => $this->Discription,
                                 'themeId' => $this->themeId,
                                 'themeIMG' => $this->themeIMG);*/
-                    return printTheme();
+                    return array('Element' => $this->getElement());
                 }
 
             }

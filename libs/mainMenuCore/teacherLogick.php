@@ -33,8 +33,7 @@
 			{//создать тему и вывести
                             $currentTheme = new Theme();
                             $currentTheme->GetThemeConstruct($theme);
-                            $currentTheme->printTheme();
-                            //include 'themeElement.htm';
+                            echo $currentTheme->getElement();
 			}
 		}		
 
