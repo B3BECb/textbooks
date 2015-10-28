@@ -1,53 +1,22 @@
-function onResponse(d) 
-{  
-	eval('var obj = ' + d + ';');  
-	alert(obj.message); 
-	if(obj.success != "0") 
-	{
-		switch (obj.type)
-		{
-			case "create":
-				objectsBody.innerHTML += 
-					`<div class="objBox" id="Theme_`+obj.themeId+`">
-						<img class="objImg" src=`+obj.themeIMG+`>
-						<div class="objName"> 
-							<span class="name" onClick="location.href='index.php?theme=`+obj.themeId+`'">`+obj.themeName+`</span>
-						</div>	
-						<div class="objDiscription" onClick="location.href='index.php?theme=`+obj.themeId+`'">`+obj.themeDiscription+`</div>			
-						<div class="objControls">
-							<span class="topBtn">
-								<div onClick="EditTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
-									<span class="topButtonText">Изменить</span>
-									<img src="../../svgs/edit.svg">
-								</div>
-							</span>					
-							<span class="topBtn">
-								<div  onClick="ThemeInfo(`+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
-									<span class="topButtonText">Cведения</span>
-									<img src="../../svgs/info.svg">
-								</div>
-							</span>
-							<span class="topBtn">
-								<div  onClick="RemoveTheme(this, `+obj.themeId+`);" class="controlButton" style="top:0px; position:relative;">
-									<span class="topButtonText">Удалить</span>
-									<img src="../../svgs/delete.svg">
-								</div>
-							</span>
-						</div>
-					</div>`
-				$('#addThemeModalWindow').hide();
-			break;
+function onResponse(response) 
+{ 
+    /*switch (obj.type)
+    {*/
+           // case "create":
+                    objectsBody.innerHTML += response.Element;
 
-			case "edit":
-				var objElement = $("#Theme_"+obj.themeId).find($(".objImg")).get(0)
-				objElement.src = obj.themeIMG
-				var objElement = $("#Theme_"+obj.themeId).find($(".name")).get(0)
-				objElement.textContent = obj.themeName
-				var objElement = $("#Theme_"+obj.themeId).find($(".objDiscription")).get(0)
-				objElement.textContent = obj.themeDiscription				
-			break;
-		}
-	}  
+                    $('#addThemeModalWindow').hide();
+            //break;
+
+           /* case "edit":
+                    var objElement = $("#Theme_"+obj.themeId).find($(".objImg")).get(0)
+                    objElement.src = obj.themeIMG
+                    var objElement = $("#Theme_"+obj.themeId).find($(".name")).get(0)
+                    objElement.textContent = obj.themeName
+                    var objElement = $("#Theme_"+obj.themeId).find($(".objDiscription")).get(0)
+                    objElement.textContent = obj.themeDiscription				
+            break;
+    } */ 
 }
 
 function RemoveTheme(obj, themeId)
@@ -68,13 +37,21 @@ function ThemeInfo(themeId)
 	$.ajax({
 	  type: "GET",
 	  url: "http://textbooks/",
+          dataType: 'json',
 	  data: "getThemeInfo="+themeId,
-	  success: function(msg){
-	  	eval('var obj = ' + msg + ';');
+	  success: function(obj){
 	    
+            obj = [
+                "Тема: "+obj.Caption,
+                "Автор: "+obj.AutorFIO,
+                "Уроков: "+obj.LessonsCount,
+                "Презентаций: "+obj.PresentationsCount,
+                "Описание: "+obj.Discription
+            ]
+            
 	    for (var i = 1; i < themeInfoContent.children.length-1; i++) {	    		    	
-	    	themeInfoContent.children[i].innerHTML = obj[i];	    		    	
-	    };
+	    	themeInfoContent.children[i].innerHTML = obj[i-1];	    		    	
+	    };            
 
 		$('#ThemeInfo').show()
 	  }

@@ -55,8 +55,11 @@
 
             function GetThemeInfo($theme_id)
             {
-                    $theme = new Theme($theme_id);
-                    echo "{'2':'<b>Автор:</b> ".$theme->AutorFIO."','1':`<b>Название темы:</b> ".$theme->Caption."`,'5':`<b>Описание:</b> ".$theme->Discription."`,'3':'<b>Количество учебников:</b> ".$theme->LessonsCount."','4':'<b>Количество презентаций:</b> ".$theme->PresentationsCount."'}";
+                    $theme = new Theme;
+                    $theme->ThemeInfo($theme_id);
+                    echo json_encode($theme);
+                    //echo "{'2':'<b>Автор:</b> ".$theme->AutorFIO."','1':`<b>Название темы:</b> ".$theme->Caption."`,'5':`<b>Описание:</b> ".$theme->Discription."`,'3':'<b>Количество учебников:</b> ".$theme->LessonsCount."','4':'<b>Количество презентаций:</b> ".$theme->PresentationsCount."'}";
+                    
             }
 
             function getFIO()
@@ -77,8 +80,11 @@
                         return;
                 }						
 
-                //$this->jsOnResponse("{'type':'create', 'message':'Тема создjjана.', 'success':'1', 'themeId':'" . $theme . "', 'themeName':`$theme`, 'themeDiscription':`$theme`, 'themeIMG':'$theme'}");
-                $this->jsOnResponse(json_encode($theme));
+                $this->jsOnResponse(json_encode(array('Element' => $theme->getElement())));
+                echo 
+                 '<script type="text/javascript">'
+                .   'alert("Тема создана");'
+                .'</script>';
             }
 	}
 
@@ -145,6 +151,7 @@
 				if (!($success = move_uploaded_file($this->themeIMG['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
 			}	
                         
+                        $this->themeIMG = $name;
                         $this->themeId = $lastInsertId;
 		}
 		
@@ -173,11 +180,16 @@
                 }
 
                 public function jsonSerialize() {//выводить тему
-                    /*return array('Caption' => $this->Caption,
-                                'Discription' => $this->Discription,
-                                'themeId' => $this->themeId,
-                                'themeIMG' => $this->themeIMG);*/
-                    return array('Element' => $this->getElement());
+                    return array(
+                        'Caption' => $this->Caption,
+                        'Discription' => $this->Discription,
+                        'themeId' => $this->themeId,
+                        'themeIMG' => $this->themeIMG,
+                        'AutorFIO' => $this->AutorFIO,
+                        'LessonsCount' => $this->LessonsCount,
+                        'PresentationsCount' => $this->PresentationsCount
+                        );
+                    //return array('Element' => $this->getElement());
                 }
 
             }
