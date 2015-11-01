@@ -51,7 +51,7 @@
 				$dir = "themes/theme_$themeId"; // путь к каталогу загрузок на сервере
 				$file = ($name) ? "$dir/$name" : "";//полный путь к файлу
 
-				if ($img['tmp_name'])
+				if (@$img['tmp_name'])
 				{
 					$ExtentionsClassificator = new extensionClassificator();
 					$extention = pathinfo($img['name'], PATHINFO_EXTENSION);
@@ -59,12 +59,12 @@
 			
 					$oldName = $name;
 					$name = basename($img['name']);//имя файла и расширение
-					$file = "$dir/$name";//полный путь к файлу				
-
-					if (!($success = move_uploaded_file($img['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
-
+					$file = "$dir/$name";//полный путь к файлу	
+                                        
 					//замена = закачать -> удалить 	
 					@unlink("themes/theme_$themeId/$oldName");
+
+					if (!($success = move_uploaded_file($img['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
 
 					$mysqli->query("UPDATE themes SET themeName = '$themeName', discription = '$discription', img = '".$img['name']."' WHERE theme_id = $themeId");
 
@@ -82,8 +82,10 @@
 					@unlink("themes/theme_$themeId/$name");
 				}
 
-				$this->jsOnResponse("{'type':'edit', 'message':'Тема изменена.', 'success':'1', 'themeId':'$themeId', 'themeName':`$themeName`, 'themeDiscription':`$discription`, 'themeIMG':'$file'}");
-			
+				//$this->jsOnResponse("{'type':'edit', 'message':'Тема изменена.', 'success':'1', 'themeId':'$themeId', 'themeName':`$themeName`, 'themeDiscription':`$discription`, 'themeIMG':'$file'}");
+                                $theme = new Theme;
+                                $theme->EditThemeConstruct($themeName, $themeId, $discription, $name);
+                                echo json_encode(array('success' => '1', 'Msg' => 'Тема изменена', 'themeId' => $themeId,'Element' => $theme->getElement()));
 			} 
 			catch (Exception $e) 
 			{

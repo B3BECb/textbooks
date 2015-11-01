@@ -64,22 +64,21 @@ function EditTheme()
     $.ajax({
 	  type: "POST",
 	  url: "http://textbooks/",
-          processData: false,
-          contentType: false,
+     processData: false,
+     contentType: false,
+          dataType: 'json',
 	  data: formData,
 	  success: function(obj){
-            var objElement = $("#Theme_"+obj.themeId).find($(".objImg")).get(0);
-            objElement.src = obj.themeIMG;
-            var objElement = $("#Theme_"+obj.themeId).find($(".name")).get(0);
-            objElement.textContent = obj.Caption;
-            var objElement = $("#Theme_"+obj.themeId).find($(".objDiscription")).get(0);
-            objElement.textContent = obj.Discription;
+              alert(obj.Msg);
+              if(obj.success)
+              {
+                $("#Theme_"+obj.themeId).remove();
+                objectsBody.innerHTML += obj.Element;
+              }
+
+              $('#editTheme').hide();
           }
       });
-          /*processData: false,
-          contentType: false,
-          cache:false,
-	  data: $('#editThemeForm').serialize(),*/
 }
 
 function FillEditTheme (obj, themeId) {

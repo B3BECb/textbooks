@@ -98,7 +98,7 @@
 							return;
 
 							case 'editTheme':						
-								$teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], ($_POST['editThemePict']) ? $_FILES['upload'] : "");
+								$teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], @($_POST['editThemePict']) ? $_FILES['upload'] : "");
 								return;
 
 							default:

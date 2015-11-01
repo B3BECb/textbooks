@@ -113,6 +113,14 @@
                     $this->newTheme();
                 }
                 
+                function EditThemeConstruct($themeName, $themeId, $themeDiscription = '', $themeIMG = '')
+                {
+                    $this->Caption	= $themeName;
+                    $this->Discription	= $themeDiscription;
+                    $this->themeId      = $themeId;
+                    $this->themeIMG	= $themeIMG;
+                }
+                
                 function GetThemeConstruct($result)
                 {
                     $this->Caption	= $result['themeName'];
