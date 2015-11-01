@@ -58,7 +58,31 @@ function ThemeInfo(themeId)
 	});
 }
 
-function EditTheme (obj, themeId) {
+function EditTheme()
+{
+    var formData = new FormData($('#editThemeForm')[0])
+    $.ajax({
+	  type: "POST",
+	  url: "http://textbooks/",
+          processData: false,
+          contentType: false,
+	  data: formData,
+	  success: function(obj){
+            var objElement = $("#Theme_"+obj.themeId).find($(".objImg")).get(0);
+            objElement.src = obj.themeIMG;
+            var objElement = $("#Theme_"+obj.themeId).find($(".name")).get(0);
+            objElement.textContent = obj.Caption;
+            var objElement = $("#Theme_"+obj.themeId).find($(".objDiscription")).get(0);
+            objElement.textContent = obj.Discription;
+          }
+      });
+          /*processData: false,
+          contentType: false,
+          cache:false,
+	  data: $('#editThemeForm').serialize(),*/
+}
+
+function FillEditTheme (obj, themeId) {
 	editThemeInput.value = themeId;
 
 	var objElement = $(obj).parents("div.objBox").find($(".name")).get(0)
