@@ -80,6 +80,7 @@
 					//полное удаление изображения
 					$mysqli->query("UPDATE themes SET themeName = '$themeName', discription = '$discription', img = '' WHERE theme_id = $themeId");					
 					@unlink("themes/theme_$themeId/$name");
+                                        $name = '';
 				}
 
 				//$this->jsOnResponse("{'type':'edit', 'message':'Тема изменена.', 'success':'1', 'themeId':'$themeId', 'themeName':`$themeName`, 'themeDiscription':`$discription`, 'themeIMG':'$file'}");
