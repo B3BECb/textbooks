@@ -10,10 +10,10 @@
 	$mysqli->query("SET NAMES utf8");
 	
 	/*вход и выход из системы*/
-	if (!$_SESSION['userId'])
+	if (empty($_SESSION['userId']))
 	{ 
 		$autorization = new AutClass();
-		if($_POST['log'])
+		if(!empty($_POST['log']))
 		{	
 			$autorization->logIn($_POST['log'], $_POST['pas']);
 

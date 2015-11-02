@@ -78,13 +78,9 @@
                 {
                         $this->jsOnResponse("{'message':'Ошибка создания темы! ".$e->getMessage()."', 'success':'0'}");
                         return;
-                }						
-
-                $this->jsOnResponse(json_encode(array('Element' => $theme->getElement())));
-                echo 
-                 '<script type="text/javascript">'
-                .   'alert("Тема создана");'
-                .'</script>';
+                }	
+                
+                echo json_encode(array('Msg' => 'Тема создана', 'Element' => $theme->getElement()));
             }
 	}
 

@@ -19,6 +19,28 @@ function onResponse(response)
     } */ 
 }
 
+function NewTheme()
+{
+	var formData = new FormData($('#newTheme')[0])
+    $.ajax({
+	  type: "POST",
+	  url: "http://textbooks/",
+     processData: false,
+     contentType: false,
+     dataType: 'json',
+	  data: formData,
+	  success: function(obj){
+              alert(obj.Msg);
+              if(obj.success)
+              {
+                objectsBody.innerHTML += obj.Element;
+              }
+
+              $('#newTheme').hide();
+          }
+      });
+}
+
 function RemoveTheme(obj, themeId)
 {
 	$.ajax({
