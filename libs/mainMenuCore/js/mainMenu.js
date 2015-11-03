@@ -31,12 +31,12 @@ function NewTheme()
 	  data: formData,
 	  success: function(obj){
               alert(obj.Msg);
-              if(obj.success)
+              if(obj.Element)
               {
                 objectsBody.innerHTML += obj.Element;
               }
 
-              $('#newTheme').hide();
+              $('#addThemeModalWindow').hide();
           }
       });
 }

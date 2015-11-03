@@ -90,7 +90,7 @@
 			} 
 			catch (Exception $e) 
 			{
-				$this->jsOnResponse("{'message':'Ошибка изменения темы! ".$e->getMessage()."', 'success':'0'}");	
+                            echo json_encode(array('Msg' => 'Ошибка изменения темы! '.$e->getMessage()));	
 			}
 			//Заменить все формы на аякс
 			//https://youtu.be/qo7Hqwypwcc?list=PLtjuvkyFrt5Wjd-973N117XS7xuuoD6XM&t=1743			

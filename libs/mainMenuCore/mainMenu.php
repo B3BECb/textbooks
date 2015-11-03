@@ -20,16 +20,7 @@
 	class user
 	{
             public $id;
-            public $FIO;
-
-            function jsOnResponse($obj)  //ответ сервера
-            {  
-                    echo ' 
-                    <script type="text/javascript"> 
-                    window.parent.onResponse('.$obj.');
-                    </script> 
-                    ';  
-            }	
+            public $FIO;	
 
             function removeDirectory($dir) 
             {			
@@ -57,9 +48,7 @@
             {
                     $theme = new Theme;
                     $theme->ThemeInfo($theme_id);
-                    echo json_encode($theme);
-                    //echo "{'2':'<b>Автор:</b> ".$theme->AutorFIO."','1':`<b>Название темы:</b> ".$theme->Caption."`,'5':`<b>Описание:</b> ".$theme->Discription."`,'3':'<b>Количество учебников:</b> ".$theme->LessonsCount."','4':'<b>Количество презентаций:</b> ".$theme->PresentationsCount."'}";
-                    
+                    echo json_encode($theme);                 
             }
 
             function getFIO()
@@ -76,7 +65,7 @@
                 }
                 catch (Exception $e)
                 {
-                        $this->jsOnResponse("{'message':'Ошибка создания темы! ".$e->getMessage()."', 'success':'0'}");
+                        echo json_encode(array('Msg' => 'Ошибка создания темы! '.$e->getMessage()));                       
                         return;
                 }	
                 
@@ -145,7 +134,9 @@
 
 			//Создать новую директорию темы
 			mkdir("themes/theme_$lastInsertId");
-
+                        
+                        $name = '';
+                        
 			if ($this->themeIMG['tmp_name'])
 			{					
 				$dir = "themes/theme_$lastInsertId"; // путь к каталогу загрузок на сервере			
@@ -193,7 +184,6 @@
                         'LessonsCount' => $this->LessonsCount,
                         'PresentationsCount' => $this->PresentationsCount
                         );
-                    //return array('Element' => $this->getElement());
                 }
 
             }
