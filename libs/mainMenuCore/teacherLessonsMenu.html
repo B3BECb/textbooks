@@ -5,7 +5,7 @@
 		<script type="text/javascript" src="../../js/jquery/jquery-2.1.4.min.js"></script>		
 		<script type="text/javascript" src="libs/mainMenuCore/js/styles.js"></script>
 		<script type="text/javascript" src="../../js/queryToServer.js"></script>
-		<script type="text/javascript" src="libs/mainMenuCore/js/mainMenu.js"></script>
+		<script type="text/javascript" src="libs/mainMenuCore/js/lessonsMenu.js"></script>
 		<style type="text/css">
 		</style>
 	</head>
@@ -44,11 +44,11 @@
 			<div class="modalWindowPageBg"></div>
 			<div class="modalWindow" style=" height: 420px; width: 370px;">
 				<div class="content">
-					<form onsubmit="newLesson(this);return false;" id="newTheme">
+					<form enctype="multipart/form-data"  id="newLesson">
 						<div class="modalWindowCaption">
 							Содать урок/презентацию
 						</div>
-<input name="sayHello" type="hidden" value="1"/>
+                                            
 						<div style="margin-top:10px;">
 							Название<br>
 							<input name="newLessonName" type="text"/><br>
@@ -81,7 +81,7 @@
 						</div>
 
 						<div style="margin-top:10px;">
-							<div class="button" onclick="$('#newTheme').submit();"><span class="buttonText">Создать</span></div>
+							<div class="button" onclick="newLesson();//$('#newTheme').submit();"><span class="buttonText">Создать</span></div>
 							<div class="button" onclick="$('#addThemeModalWindow').hide();"><span class="buttonText">Отмена</span></div>
 						</div>
 						<div style="margin-top:5px; height:5px;"></div>

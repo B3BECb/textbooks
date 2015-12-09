@@ -96,21 +96,3 @@ function FillEditTheme (obj, themeId) {
     $('#editTheme').show();
 }
 
-/*                    --------Уроки и презентации--------                        */
-//Новый урок или презентация
-function newLesson (form) 
-{
-    var formData = new FormData($(form)[0]);
-
-    $.ajax({
-        url: 'http://textbooks/',
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (msg) 
-        {
-            alert(msg);
-        }
-    });    
-}

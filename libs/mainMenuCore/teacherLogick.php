@@ -92,8 +92,7 @@
 			{
                             echo json_encode(array('Msg' => 'Ошибка изменения темы! '.$e->getMessage()));	
 			}
-			//Заменить все формы на аякс
-			//https://youtu.be/qo7Hqwypwcc?list=PLtjuvkyFrt5Wjd-973N117XS7xuuoD6XM&t=1743			
+			//Заменить все формы на аякс			
 		}
 
 		/*                    --------Уроки и презентации--------                        */
@@ -102,6 +101,21 @@
 		{
 			include "teacherLessonsMenu.html";
 		} 
+                
+                public function newLesson()
+                {
+                    try
+                    {
+                            $theme = new Theme;
+                            $theme->NewThemeConstruct($themeName, $this->id, $themeDiscription, $themeIMG);                            
+                    }
+                    catch (Exception $e)
+                    {
+                            echo json_encode(array('Msg' => 'Ошибка создания темы! '.$e->getMessage()));                       
+                            return;
+                    }	
 
+                    echo json_encode(array('Msg' => 'Тема создана', 'Element' => $theme->getElement()));
+                }
 	}
 ?>

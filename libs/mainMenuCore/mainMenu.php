@@ -13,6 +13,18 @@
 		
 		public function getLessonsMenu();
 	}
+        
+        /**
+        * Интерфейс предмета темы
+        */
+        interface IEducationalObject
+        {
+            public function getElement();
+            
+            public function newEducationObject();
+            
+            public function EducationObjectInfo($id);
+        }
 
 	/**
 	* Базовый класс
@@ -187,5 +199,53 @@
                 }
 
             }
+            
+            class EducationObject
+            {
+                
+            }
+            
+            class Lesson implements JsonSerializable, IEducationalObject
+            {
+                public function jsonSerialize()
+                {
+                    
+                }
+
+                public function EducationObjectInfo($id) {
+
+                }
+
+                public function getElement() {
+
+                }
+
+                public function newEducationObject() {
+
+                }
+
+            }
+            
+            class Presentation implements JsonSerializable, IEducationalObject
+            {
+                public function jsonSerialize() 
+                {
+        
+                }
+
+                public function EducationObjectInfo($id) {
+
+                }
+
+                public function getElement() {
+
+                }
+
+                public function newEducationObject() {
+
+                }
+
+            }
+            
 	
 ?>
