@@ -18,7 +18,7 @@ function newLesson ()
                 objectsBody.innerHTML += obj.Element;
             }
 
-                $('#addThemeModalWindow').hide();
+                $('#addLessonModalWindow').hide();
         }
     });
 }

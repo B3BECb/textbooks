@@ -97,7 +97,8 @@
                                                     return;
 
                                             case 'newLessonName':
-                                                echo "dasdasdasda"; return;
+                                                $teacher->newLesson($_POST['newLessonName'], $_POST['lessonType'], $_POST['newLessonDiscription'], $_FILES['upload']);
+                                                return;
 
                                             case 'sayHello':
                                                     echo "Hi! I'm Post request".$_POST['newLessonDiscription'];print_r($_FILES['upload']);

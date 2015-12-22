@@ -102,20 +102,20 @@
 			include "teacherLessonsMenu.html";
 		} 
                 
-                public function newLesson()
-                {
-                    try
-                    {
-                            $theme = new Theme;
-                            $theme->NewThemeConstruct($themeName, $this->id, $themeDiscription, $themeIMG);                            
-                    }
-                    catch (Exception $e)
-                    {
-                            echo json_encode(array('Msg' => 'Ошибка создания темы! '.$e->getMessage()));                       
-                            return;
-                    }	
-
-                    echo json_encode(array('Msg' => 'Тема создана', 'Element' => $theme->getElement()));
-                }
+//                public function newLesson()
+//                {
+//                    try
+//                    {
+//                            $theme = new Theme;
+//                            $theme->NewThemeConstruct($themeName, $this->id, $themeDiscription, $themeIMG);                            
+//                    }
+//                    catch (Exception $e)
+//                    {
+//                            echo json_encode(array('Msg' => 'Ошибка создания темы! '.$e->getMessage()));                       
+//                            return;
+//                    }	
+//
+//                    echo json_encode(array('Msg' => 'Тема создана', 'Element' => $theme->getElement()));
+//                }
 	}
 ?>
