@@ -1,10 +1,11 @@
 <?php
 	class EducationObject
 	{
-		protected $_name;
-		protected $_discription;
-		protected $_img;
-		protected $_theme;
+		protected $objectId;
+		protected $name;
+		protected $discription;
+		protected $img;
+		protected $theme;
 		 
 	    public function NewEducationObject($type)
 	    {

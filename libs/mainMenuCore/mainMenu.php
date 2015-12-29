@@ -90,16 +90,19 @@
             {
                 try
                 {
+                	$currentTheme = $_SESSION['CurrentTheme'];
                     $educObjectFabric = new EducationObject();
                     $educObject = $educObjectFabric->NewEducationObject($lessonType); 
+                    $educObject->initializeFields($currentTheme, $lessonName, $lessonDiscription, $lessonIMG);
+                    $educObject->Create();
                 }
                 catch (Exception $e)
                 {
-                        echo json_encode(array('Msg' => 'Ошибка создания объекта образования! '.$e->getMessage()));                       
+                        echo json_encode(array('Msg' => 'Ошибка! '.$e->getMessage()));                       
                         return;
                 }	
                 
-                echo json_encode(array('Msg' => 'Объект образования создан', 'Element' => $theme->getElement()));
+                echo json_encode(array('Msg' => 'Готово.', 'Element' => $educObject->getElement()));
             }
 	}           
              	

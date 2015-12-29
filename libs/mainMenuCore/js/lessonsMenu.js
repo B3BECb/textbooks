@@ -10,6 +10,7 @@ function newLesson ()
         data: formData,
         processData: false,
         contentType: false,
+    	dataType: 'json',
         success: function (obj) 
         {
             alert(obj.Msg);

@@ -1,0 +1,31 @@
+<?php return '
+<div class="objBox" id=Theme_'.$this->objectId.'>
+	<img class="objImg" src='.(($this->img)?('themes/theme_'.$this->theme.'/lesson_'.$this->objectId.'/'.$this->img):'').'>
+	<div class="objName" onClick="location.href=\'?lesson='.$this->objectId .'\'"> 
+		<span class="name">'.$this->name.'</span>
+	</div>	
+	<div class="objDiscription" onClick="location.href=\'?lesson='.$this->objectId.'\'">
+		'.$this->discription.'
+	</div>			
+	<div class="objControls">
+		<span class="topBtn">
+			<div onClick="FillEditTheme(this, '.$this->objectId.');" class="controlButton" style="top:0px; position:relative;">
+				<span class="topButtonText">Изменить</span>
+				<img src="../../svgs/edit.svg">
+			</div>
+		</span>
+		<span class="topBtn">
+			<div onClick="ThemeInfo('.$this->objectId.');" class="controlButton" style="top:0px; position:relative;">
+				<span class="topButtonText">Cведения</span>
+				<img src="../../svgs/info.svg">
+			</div>
+		</span>
+		<span class="topBtn">
+			<div onClick="RemoveTheme(this, '.$this->objectId.');" class="controlButton" style="top:0px; position:relative;">
+				<span class="topButtonText">Удалить</span>
+				<img src="../../svgs/delete.svg">
+			</div>
+		</span>
+	</div>
+</div>';
+?>
