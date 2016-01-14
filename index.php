@@ -74,6 +74,10 @@
                                             case 'removeTheme':
                                                     $teacher->RemoveTheme($_GET['removeTheme']); 
                                                     return;
+                                                    
+                                            case 'removeLesson':
+                                            		$teacher->RemoveLesson($_GET['removeLesson']);
+                                            		return;
 
                                             case 'exit':
                                                     $autorization = new AutClass();

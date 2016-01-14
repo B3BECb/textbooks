@@ -50,13 +50,24 @@
 
             function RemoveTheme($themeId)
             {
-                    global $mysqli;
+                global $mysqli;
 
-                    $this->removeDirectory("themes/theme_$themeId");
-                    $mysqli->query("DELETE FROM themes WHERE theme_id = $themeId;");
+                $this->removeDirectory("themes/theme_$themeId");
+                $mysqli->query("DELETE FROM themes WHERE theme_id = $themeId;");
 
-                    echo "Тема удалена.";
+                echo "Тема удалена.";
             }
+            
+            function RemoveLesson($lessonId) 
+            {
+				global $mysqli;
+				$themeId = $_SESSION['CurrentTheme'];
+
+                $this->removeDirectory("themes/theme_$themeId/lesson_$lessonId");
+                $mysqli->query("DELETE FROM lessons WHERE lesson_id = $lessonId;");
+
+                echo "Готово.";
+           	}
 
             function GetThemeInfo($theme_id)
             {

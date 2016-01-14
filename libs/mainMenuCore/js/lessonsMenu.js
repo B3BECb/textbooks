@@ -24,7 +24,7 @@ function newLesson ()
     });
 }
     
-function RemoveTheme(obj, lessonId)
+function RemoveLesson(obj, lessonId)
 {
     $.ajax({
         type: "GET",
