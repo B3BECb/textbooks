@@ -11,6 +11,15 @@
 	    public function EducationObjectInfo($id) {
 	
 	    }
+	    
+	    function GetLessonConstruct($result)
+	    {
+	    	$this->objectId = $result['lesson_id'];
+	        $this->name	= $result['lessonName'];
+	        $this->discription	= $result['discription'];
+	        //$this->theme      = $result['img'];
+	        $this->img	= $result['img'];
+	    }
 	
 	    public function getElement() {
 			return include 'lessonElement.html';

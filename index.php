@@ -67,8 +67,8 @@
                                                     return;
 
                                             case 'theme':
-                                                    $teacher->getLessonsMenu();
                                                     $_SESSION['CurrentTheme'] = $_GET['theme'];
+                                                    $teacher->getLessonsMenu();
                                                     return;
 
                                             case 'removeTheme':
