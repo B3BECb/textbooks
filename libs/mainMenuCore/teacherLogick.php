@@ -106,13 +106,13 @@
 		{
 			global $mysqli;
 
-			//выбрать все темы, где владелец этот учитель
+			//выбрать все уроки, принадлежащие этой теме
 			$themeLessons = $mysqli->query("SELECT lesson_id, lessonName, discription, img FROM lessons WHERE theme_id_fk = ".$_SESSION['CurrentTheme']);
 			
 			if(!mysqli_num_rows($themeLessons)) return;
 
 			while($lesson = mysqli_fetch_array($themeLessons))
-			{//создать тему и вывести
+			{//создать урок и вывести
                             $currentLesson = new Lesson();
                             $currentLesson->GetLessonConstruct($lesson);
                             echo $currentLesson->getElement();

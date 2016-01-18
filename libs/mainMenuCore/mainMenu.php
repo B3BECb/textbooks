@@ -75,6 +75,13 @@
                     $theme->ThemeInfo($theme_id);
                     echo json_encode($theme);                 
             }
+            
+            function GetEducationObjectInfo($objectId, $objectType) 
+            {
+            		$lesson = new Lesson;
+                    $lesson->LessonInfo($objectId, $objectType);
+                    echo json_encode($lesson);
+            }            	
 
             function getFIO()
             {
