@@ -10,7 +10,7 @@
 
         }
 
-        public function EducationObjectInfo($id) {
+        public function Info($id) {
 
         }
 

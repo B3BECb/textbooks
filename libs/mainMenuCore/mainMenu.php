@@ -25,7 +25,7 @@
     {
         public function getElement();
         
-        public function EducationObjectInfo($id);
+        public function Info($id);
     }
 
 	/**
@@ -78,9 +78,16 @@
             
             function GetEducationObjectInfo($objectId, $objectType) 
             {
+            	if($objectType == 0)
+            	{
             		$lesson = new Lesson;
-                    $lesson->LessonInfo($objectId, $objectType);
+                    $lesson->EducationObjectInfo($objectId);
                     echo json_encode($lesson);
+                }
+                else 
+                {
+                	//presentation
+                }
             }            	
 
             function getFIO()

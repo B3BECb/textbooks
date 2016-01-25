@@ -68,6 +68,7 @@
                                                     
                                             case 'getEducationObjectInfo':
                                             		$teacher->GetEducationObjectInfo($_GET['getEducationObjectInfo'], $_GET['educationObjectType']);
+                                            		return;
 
                                             case 'theme':
                                                     $_SESSION['CurrentTheme'] = $_GET['theme'];

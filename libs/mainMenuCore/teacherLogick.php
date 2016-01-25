@@ -118,5 +118,20 @@
                             echo $currentLesson->getElement();
 			}
 		}
+		
+		public function GetEducationObjectInfo($id, $type)
+		{
+			if($type == 1) 
+			{
+				$currentLesson = new Lesson();
+                $currentLesson->Info($id);
+                echo json_encode($currentLesson);
+                return;	
+			} 
+			else 
+			{
+				//presentationds
+			}
+		}
 	}
 ?>

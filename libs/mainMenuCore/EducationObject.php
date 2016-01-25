@@ -5,7 +5,11 @@
 		protected $name;
 		protected $discription;
 		protected $img;
-		protected $theme;
+		protected $theme;		        
+		protected $datemade;
+		protected $lastModification;
+		protected $fileCount;
+		protected $type;
 		 
 	    public function NewEducationObject($type)
 	    {

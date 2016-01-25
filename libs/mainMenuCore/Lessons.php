@@ -2,19 +2,44 @@
 	require_once "EducationObject.php";
 	
 	class Lesson extends EducationObject implements JsonSerializable, IEducationalObject
-	{                
+	{      		  
 	    public function jsonSerialize()
 	    {
-	        
+	         return array(
+	            'Caption' => $this->name,
+	            'Discription' => $this->Discription,
+	            'FileCount' => $this->fileCount,
+	            'Datemade' => $this->datemade,
+	            'LastModification' => $this->lastModification,
+	            'Type' => $this->type
+	            );
 	    }
 	
-	    public function EducationObjectInfo($id) {
-	
+	    public function Info($id) 
+	    {
+			$mysqli = $GLOBALS['mysqli'];
+
+			$lessonInfo = $mysqli->query("
+			SELECT lessonName, datemade, lastModification, discription, IFNULL(fileCount.files, 0) as fileCount 
+			FROM lessons LEFT JOIN 
+			(SELECT lesson_id_fk, COUNT(*) as files 
+				FROM lessonsFiles GROUP BY lesson_id_fk) as fileCount 
+			ON (lessons.lesson_id = fileCount.lesson_id_fk) 
+			WHERE lesson_id = $id
+			");
+			$discription = $mysqli->result($lessonInfo, 0,"discription");
+			$this->name = $mysqli->result($lessonInfo, 0,"lessonName");
+			$this->datemade = $mysqli->result($lessonInfo, 0,"datemade");
+			$this->lastModification = $mysqli->result($lessonInfo, 0,"lastModification");
+			$this->fileCount = $mysqli->result($lessonInfo, 0,"fileCount");
+			$this->Discription = ( empty($discription ) ) ? "нет" : $discription;
+			$this->type = 1;
 	    }
 	    
 	    function GetLessonConstruct($result)
 	    {
 	    	$this->objectId = $result['lesson_id'];
+	    	$this->type=1;
 	        $this->name	= $result['lessonName'];
 	        $this->discription	= $result['discription'];
 	        //$this->theme      = $result['img'];
@@ -73,6 +98,7 @@
                         
          $this->img = $name;
          $this->objectId = $lastInsertId;
+         $this->type = 1;
 	    }	
 	} 
 ?>
