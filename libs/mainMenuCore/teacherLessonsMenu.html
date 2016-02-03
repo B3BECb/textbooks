@@ -122,29 +122,30 @@
 			</div>
 		</div>
 
-		<div id="editTheme" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
+		<div id="editEducationObject" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
 			<div class="modalWindowPageBg"></div>
 			<div class="modalWindow" style=" height: 400px; width: 370px;">
 				<div class="content">
-					<form action="../../index.php" method="POST" target="rFrame" enctype="multipart/form-data" id="editThemeForm">
+					<form action="../../index.php" method="POST" target="rFrame" enctype="multipart/form-data" id="editEducationObjectForm">
 						<div class="modalWindowCaption">
 							Изменить тему
 						</div>
 
-						<input type="hidden" name="editTheme" id="editThemeInput">
+						<input type="hidden" name="editEducationObject" id="editThemeInput">
+						<input type="hidden" name="EducationObjectType">
 
 						<div style="margin-top:10px;">
 							Название темы<br>
-							<input name="editThemeName" type="text"/><br>
+							<input name="editEducationObjectName" type="text"/><br>
 						</div>
 						<div style="margin-top:10px;">
 							Описание темы<br>
-							<textarea name="editThemeDiscription" style=" width: 289px; height: 105px; resize: none;"></textarea>							
+							<textarea name="editEducationObjectDiscription" style=" width: 289px; height: 105px; resize: none;"></textarea>							
 						</div>
 
 						<div style="margin-top:10px;text-align: initial;margin-left: 90px;">
 							<div class="checkbox" onclick="if($('#check').prop('checked')) $('#uploadImgBtn').css('background','rgba(255, 255, 255, 0.7)'); else $('#uploadImgBtn').css('background','rgba(224, 224, 224, 0.27)');">
-							<input name="editThemePict" type="checkbox" id="check"><label for="check">Удалить обложку</label></div>
+							<input name="editEducationObjectPict" type="checkbox" id="check"><label for="check">Удалить обложку</label></div>
 						</div>
 
 						<div style="margin-top:10px;">
@@ -163,8 +164,8 @@
 						</div>
 
 						<div style="margin-top:10px;">
-							<div class="button" onclick=""><span class="buttonText">Изменить</span></div>
-							<div class="button" onclick="$('#editTheme').hide();"><span class="buttonText">Отмена</span></div>
+							<div class="button" onclick="EditEducationObject()"><span class="buttonText">Изменить</span></div>
+							<div class="button" onclick="$('#editEducationObject').hide();"><span class="buttonText">Отмена</span></div>
 						</div>
 						<div style="margin-top:5px; height:5px;"></div>
 

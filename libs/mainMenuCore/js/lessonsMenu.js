@@ -66,3 +66,43 @@ function LessonInfo(themeId)
     });
 }
 
+function EditEducationObject()
+{
+    var formData = new FormData($('#editEducationObjectForm')[0])
+    $.ajax({
+        type: "POST",
+        url: "http://textbooks/",
+        processData: false,
+        contentType: false,
+        //dataType: 'json',
+        data: formData,
+        success: function(obj)
+        {
+            alert(obj.Msg);
+            if(obj.success)
+            {
+                $("#Theme_"+obj.themeId).remove();
+                objectsBody.innerHTML += obj.Element;
+            }
+
+            $('#editEducationObject').hide();
+        } });     
+}
+
+function FillEditEducationObject (obj, objId) 
+{
+    editEducationObject.value = objId;
+    
+    var objElement = $(obj).parents("div.objBox").find($('input[name=objType]')).get(0)
+    var destinationElement = $('input[name=EducationObjectType]').get(0)
+    destinationElement.value = objElement.value
+
+    var objElement = $(obj).parents("div.objBox").find($(".name")).get(0)
+    var destinationElement = $('input[name=editEducationObjectName]').get(0)
+    destinationElement.value = objElement.textContent
+
+    var objElement = $(obj).parents("div.objBox").find($(".objDiscription")).get(0)
+    var destinationElement = $('textarea[name=editEducationObjectDiscription]').get(0)
+    destinationElement.value = objElement.textContent
+    $('#editEducationObject').show();
+}

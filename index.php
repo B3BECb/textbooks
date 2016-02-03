@@ -116,6 +116,9 @@
                                             case 'editTheme':						
                                                     $teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], @($_POST['editThemePict']) ? $_FILES['upload'] : "");
                                                     return;
+                                            case 'editEducationObject':						
+		                                            $teacher->EditEducationObject();
+		                                            return;
 
                                             default:
                                                     $teacher->getMenu(); return;

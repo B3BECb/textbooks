@@ -9,13 +9,13 @@
 	</div>			
 	<div class="objControls">
 		<span class="topBtn">
-			<div onClick="FillEditTheme(this, '.$this->objectId.');" class="controlButton" style="top:0px; position:relative;">
+			<div onClick="FillEditEducationObject(this, '.$this->objectId.');" class="controlButton" style="top:0px; position:relative;">
 				<span class="topButtonText">Изменить</span>
 				<img src="../../svgs/edit.svg">
 			</div>
 		</span>
 		<span class="topBtn">
-		<input type="hidden" value='.$this->type.'>
+		<input name="objType" type="hidden" value='.$this->type.'>
 			<div onClick="LessonInfo('.$this->objectId.');" class="controlButton" style="top:0px; position:relative;">
 				<span class="topButtonText">Cведения</span>
 				<img src="../../svgs/info.svg">
