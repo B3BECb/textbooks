@@ -45,29 +45,24 @@ function LessonInfo(themeId)
       url: "http://textbooks/",
       dataType: 'json',
       data: "getEducationObjectInfo="+themeId+"&educationObjectType=1",
-      success: function(obj){
-      	
-      	
-      	/*'Caption' => $this->name,
-	            'Discription' => $this->Discription,
-	            'FileCount' => $this->fileCount,
-	            'Datemade' => $this->datemade,
-	            'LastModification' => $this->lastModification,
-	            'Type' => $this->type*/
+      success: function(obj)
+      {
+      
        obj = [
           		'Название: ' +  obj.Caption,
-	            'Описание: ' + obj.Discription,
-	            'Файлов: ' + obj.FileCount,
+	            'Тип: ' + (obj.Type)? 'Урок':'Презентация',
 	            'Дата создания: ' + obj.Datemade,
-	            'Дата последней модификации: ' + obj.LastModification,
-	            'Тип: ' + (obj.Type)? 'Урок':'Презентация'
-         	]/*
+	            'Дата последней модификации: ' + obj.LastModification, 
+	            'Файлов: ' + obj.FileCount,
+	            'Описание: ' + obj.Discription        	
+	         ]
         
-        	for (var i = 1; i < themeInfoContent.children.length-1; i++) {	    		    	
-            themeInfoContent.children[i].innerHTML = obj[i-1];	  
-            $('#ThemeInfo').show()*/  		   
-            alert("ffff"); 	
-        }
+        	for (var i = 1; i < EducationObjectInfoContent.children.length-1; i++) 
+        	{	    		    	
+            	EducationObjectInfoContent.children[i].innerHTML = obj[i-1];	
+        	}  
+            $('#EducationObject').show() 	
+     }
     });
 }
 
