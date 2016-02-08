@@ -58,6 +58,15 @@
 	    	$this->theme = $currentTheme;						
 	    }
 	    
+	    public function EditLessonInitializeFields($currentTheme, $lessonId, $lessonName, $lessonDiscription = '', $lessonIMG = '') 
+	    {	
+	    	$this->objectId = $lessonId;
+	    	$this->name = $lessonName;
+	    	$this->discription = $lessonDiscription;
+	    	$this->img = $lessonIMG;
+	    	$this->theme = $currentTheme;						
+	    }
+	    
 	    public function Create()
 	    {
 			if (empty($this->name)) throw new Exception("Недопустимое название урока.");	

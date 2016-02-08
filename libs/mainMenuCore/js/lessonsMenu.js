@@ -74,14 +74,14 @@ function EditEducationObject()
         url: "http://textbooks/",
         processData: false,
         contentType: false,
-        //dataType: 'json',
+        dataType: 'json',
         data: formData,
         success: function(obj)
         {
             alert(obj.Msg);
             if(obj.success)
             {
-                $("#Theme_"+obj.themeId).remove();
+                $("#Theme_"+obj.lessonId).remove();
                 objectsBody.innerHTML += obj.Element;
             }
 
@@ -90,8 +90,9 @@ function EditEducationObject()
 }
 
 function FillEditEducationObject (obj, objId) 
-{
-    editEducationObject.value = objId;
+{   
+    var destinationElement = $('input[name=editEducationObject]').get(0)
+    destinationElement.value = objId
     
     var objElement = $(obj).parents("div.objBox").find($('input[name=objType]')).get(0)
     var destinationElement = $('input[name=EducationObjectType]').get(0)

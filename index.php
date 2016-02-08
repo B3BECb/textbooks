@@ -116,8 +116,11 @@
                                             case 'editTheme':						
                                                     $teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], @($_POST['editThemePict']) ? $_FILES['upload'] : "");
                                                     return;
-                                            case 'editEducationObject':						
-		                                            $teacher->EditEducationObject();
+                                            case 'editEducationObject':	
+                                            	if($_POST['EducationObjectType'] == 1)					
+		                                            $teacher->EditLesson($_POST['editEducationObject'], $_POST['editEducationObjectName'], $_POST['editEducationObjectDiscription'], @($_POST['editEducationObjectPict']) ? $_FILES['upload'] : "");
+												else
+													return; ///////// Заглушка. Ожидается вызов редактирования презентации		                                           
 		                                            return;
 
                                             default:

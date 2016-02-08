@@ -128,7 +128,7 @@
                 }	
                 
                 echo json_encode(array('Msg' => 'Готово.', 'Element' => $educObject->getElement()));
-            }
+            } 
 	}           
              	
 ?>
