@@ -1,0 +1,3 @@
+[submodule "libs/Editors/wysiwyg/ckeditor-dev"]
+	path = libs/Editors/wysiwyg/ckeditor-dev
+	url = git@github.com:ckeditor/ckeditor-dev.git
