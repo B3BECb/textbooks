@@ -99,7 +99,7 @@
 
 		function getLessonsMenu()
 		{
-			include "teacherLessonsMenu.html";
+			include "teacherLessonsMenu.htm";
 		} 
 		
 		function getLessons()
