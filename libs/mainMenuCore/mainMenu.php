@@ -9,7 +9,7 @@
 	*/
 	interface IUser
 	{
-		public function EditTheme($themeId, $themeName, $discription, $img );
+		public function EditTheme($themeId, $themeName, $discription, $img);
 
 		public function getMenu();
 		
@@ -66,7 +66,7 @@
                 $this->removeDirectory("themes/theme_$themeId/lesson_$lessonId");
                 $mysqli->query("DELETE FROM lessons WHERE lesson_id = $lessonId;");
 
-                echo "Готово.";
+                echo "Урок удален.";
            	}
 
             function GetThemeInfo($theme_id)

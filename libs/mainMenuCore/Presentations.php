@@ -20,7 +20,7 @@
 
         public function initializeFields($slidesCount, $currentTheme, $lessonName, $lessonType, $lessonDiscription = '', $lessonIMG = '') 
         {
-				$this->$_name = $lessonName;
+            $this->$_name = $lessonName;
         	$this->$_discription = $lessonDiscription;
         	$this->$_img = $lessonIMG;
         	$this->$_theme = $currentTheme;	
