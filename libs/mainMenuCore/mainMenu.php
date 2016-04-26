@@ -9,7 +9,7 @@
 	*/
 	interface IUser
 	{
-		public function EditTheme($themeId, $themeName, $discription, $img );
+		public function EditTheme($themeId, $themeName, $discription, $img);
 
 		public function getMenu();
 		
@@ -25,7 +25,7 @@
     {
         public function getElement();
         
-        public function Info($id);
+        public function EducationObjectInfo($id);
     }
 
 	/**
@@ -66,7 +66,7 @@
                 $this->removeDirectory("themes/theme_$themeId/lesson_$lessonId");
                 $mysqli->query("DELETE FROM lessons WHERE lesson_id = $lessonId;");
 
-                echo "Готово.";
+                echo "Урок удален.";
            	}
 
             function GetThemeInfo($theme_id)
@@ -75,20 +75,6 @@
                     $theme->ThemeInfo($theme_id);
                     echo json_encode($theme);                 
             }
-            
-            function GetEducationObjectInfo($objectId, $objectType) 
-            {
-            	if($objectType == 0)
-            	{
-            		$lesson = new Lesson;
-                    $lesson->EducationObjectInfo($objectId);
-                    echo json_encode($lesson);
-                }
-                else 
-                {
-                	//presentation
-                }
-            }            	
 
             function getFIO()
             {
@@ -128,7 +114,7 @@
                 }	
                 
                 echo json_encode(array('Msg' => 'Готово.', 'Element' => $educObject->getElement()));
-            } 
+            }
 	}           
              	
 ?>
