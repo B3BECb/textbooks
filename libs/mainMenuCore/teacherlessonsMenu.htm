@@ -1,0 +1,175 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../css/elements.css">
+		<link rel="stylesheet" type="text/css" href="libs/mainMenuCore/css/main.css">
+		<script type="text/javascript" src="../../js/jquery/jquery-2.1.4.min.js"></script>		
+		<script type="text/javascript" src="libs/mainMenuCore/js/styles.js"></script>
+		<script type="text/javascript" src="../../js/queryToServer.js"></script>
+		<script type="text/javascript" src="libs/mainMenuCore/js/lessonsMenu.js"></script>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<div class="top">
+			<div class="topBg">
+			</div>
+			<div class="topContent">
+				<span class="topDateTimeFio">
+					<?php echo "<i>".$this->getFIO()."</i>, здесь представлены ваши уроки и презентации. Сегодня <i>".date("d.m.Y")."</i>"; ?>
+				</span>
+				<span class="topBtn">
+					<div onClick="document.location='?'" class="topButton" style="left: 10px; right: initial;"><span class="topButtonText">Темы</span><img src="../../svgs/exitArrow.svg"></div>
+				</span>
+				<span class="topBtn">
+					<div onClick="document.location='?exit=1'" class="topButton"><span class="topButtonText">Выход</span><img src="../../svgs/exitArrow.svg"></div>
+				</span>
+				<div class="topActions">					
+					<div id="searchBtn" class="searchButton"><span class="topButtonText">Поиск</span><img src="../../svgs/search.svg"></div>
+					<div id="addBtn" class="searchButton" onclick="$('#addLessonModalWindow').show();"><span class="topButtonText">Добавить</span><img src="../../svgs/add.svg"></div>
+					<div class="searchElements">
+						<input type="text" style="height:33px; width:400;" value="Поиск"> 
+						<div class="button"><span class="buttonText">Найти</span></div>
+					</div>
+				</div>
+			</div>
+		</div>		
+
+		<div id="objectsBody" style="  margin-top: 30px; position: absolute;">
+
+			<?php echo $this->getLessons(); ?>			
+
+		</div>
+
+		<div id="addLessonModalWindow" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
+			<div class="modalWindowPageBg"></div>
+			<div class="modalWindow" style=" height: 420px; width: 370px;">
+				<div class="content">
+					<form enctype="multipart/form-data"  id="newLesson">
+						<div class="modalWindowCaption">
+							Содать урок/презентацию
+						</div>
+                                            
+						<div style="margin-top:10px;">
+							Название<br>
+							<input name="newLessonName" type="text"/><br>
+						</div>
+						<div style="margin-top:10px;">
+							Описание<br>
+							<textarea name="newLessonDiscription" style=" width: 289px; height: 105px; resize: none;"></textarea>							
+						</div>
+
+						<div style="margin-top:10px;">
+							<select name="lessonType">
+						        <option value="0">Урок</option>
+						        <option value="1">Презентация</option>
+						    </select>
+						</div>
+
+						<div style="margin-top:10px;">
+							Обложка
+							<div style="text-align: initial;">
+								<input type="file" name="upload" id="upload_hidden"
+					        	style="position: absolute; display: table; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
+					        	onchange="document.getElementById('upload1').innerHTML = this.files[0].name;" />
+						      	<div onclick="document.getElementById('upload_hidden').click();" class="button">
+						      		<span class="buttonText">Обзор</span>      		
+						      	</div>
+						      	<div class="upload_visible_div">
+						      		<label id ="upload1" class="upload_visible" onclick="document.getElementById('upload_hidden').click();">Выберите файл.</label>
+						      	</div>	      			
+							</div>
+						</div>
+
+						<div style="margin-top:10px;">
+							<div class="button" onclick="newLesson();//$('#newTheme').submit();"><span class="buttonText">Создать</span></div>
+							<div class="button" onclick="$('#addThemeModalWindow').hide();"><span class="buttonText">Отмена</span></div>
+						</div>
+						<div style="margin-top:5px; height:5px;"></div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div id="ThemeInfo" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
+			<div class="modalWindowPageBg"></div>
+			<div class="modalWindow" style=" height: inherit; width: 600px;">
+				<div id = "themeInfoContent" class="content">
+					<div class="modalWindowCaption">
+							Информация о теме
+					</div>
+					<div class = "themeInfoContent">
+						Кто создал
+					</div>
+					<div class = "themeInfoContent">
+						Название
+					</div>
+					<div class = "themeInfoContent">
+						Сколько учебников
+					</div>
+					<div class = "themeInfoContent">
+						Сколько презентаций
+					</div>
+					<div class = "themeInfoContent" style="height: 250;">
+						Описание
+					</div>					
+					<div class="button" onclick="$('#ThemeInfo').hide();">
+						<span class="buttonText">Вернуться</span>
+					</div>					
+				</div>
+			</div>
+		</div>
+
+		<div id="editTheme" class="modalContainer" style=" top: 100px; display:none; z-index: 4">
+			<div class="modalWindowPageBg"></div>
+			<div class="modalWindow" style=" height: 400px; width: 370px;">
+				<div class="content">
+					<form action="../../index.php" method="POST" target="rFrame" enctype="multipart/form-data" id="editThemeForm">
+						<div class="modalWindowCaption">
+							Изменить тему
+						</div>
+
+						<input type="hidden" name="editTheme" id="editThemeInput">
+
+						<div style="margin-top:10px;">
+							Название темы<br>
+							<input name="editThemeName" type="text"/><br>
+						</div>
+						<div style="margin-top:10px;">
+							Описание темы<br>
+							<textarea name="editThemeDiscription" style=" width: 289px; height: 105px; resize: none;"></textarea>							
+						</div>
+
+						<div style="margin-top:10px;text-align: initial;margin-left: 90px;">
+							<div class="checkbox" onclick="if($('#check').prop('checked')) $('#uploadImgBtn').css('background','rgba(255, 255, 255, 0.7)'); else $('#uploadImgBtn').css('background','rgba(224, 224, 224, 0.27)');">
+							<input name="editThemePict" type="checkbox" id="check"><label for="check">Удалить обложку</label></div>
+						</div>
+
+						<div style="margin-top:10px;">
+							Картинка темы
+							<div style="text-align: initial;">
+								<input type="file" name="upload" id="upload_hidden2"
+					        	style="position: absolute; display: table; overflow: hidden; width: 0; height: 0; border: 0; padding: 0;"
+					        	onchange="document.getElementById('upload2').innerHTML = this.files[0].name;" />
+						      	<div style="background: rgba(224, 224, 224, 0.27);" onclick="if(check.checked) upload_hidden2.click();" class="button" id="uploadImgBtn">
+						      		<span class="buttonText">Обзор</span>      		
+						      	</div>
+						      	<div class="upload_visible_div">
+						      		<label id ="upload2" class="upload_visible" onclick="if(check.checked) upload_hidden2.click();">Выберите файл.</label>
+						      	</div>	      			
+							</div>
+						</div>
+
+						<div style="margin-top:10px;">
+							<div class="button" onclick=""><span class="buttonText">Изменить</span></div>
+							<div class="button" onclick="$('#editTheme').hide();"><span class="buttonText">Отмена</span></div>
+						</div>
+						<div style="margin-top:5px; height:5px;"></div>
+
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	<iframe id="rFrame" name="rFrame" style="display: none"></iframe>
+	</body>
+</html>
