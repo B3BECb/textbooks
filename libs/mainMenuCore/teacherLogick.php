@@ -18,7 +18,7 @@
 
 		function getMenu()
 		{
-			include "teacherMainMenu.html";
+			include "templates/teacherMainMenu.html";
 		}
 
 		function getThemes()
@@ -106,7 +106,7 @@
 
 		function getLessonsMenu()
 		{
-			include "teacherLessonsMenu.html";
+			include "templates/teacherLessonsMenu.html";
 		} 
 		
 		function getLessons()

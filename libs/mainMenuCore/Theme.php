@@ -98,7 +98,7 @@
                 
 	    public function getElement()
 	    {                  
-	       return include 'themeElement.htm';
+	       return include 'templates/themeElement.htm';
 	    }
 	
 	    public function jsonSerialize() 

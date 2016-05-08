@@ -22,7 +22,7 @@
 	    }
 	
 	    public function getElement() {
-			return include 'lessonElement.html';
+			return include 'templates/LessonElement.html';
 	    }
 	
 	    public function initializeFields($currentTheme, $lessonName, $lessonDiscription = '', $lessonIMG = '') 

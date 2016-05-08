@@ -135,7 +135,7 @@ select, input, textarea
   height: 33;
   width: 33;
   position: absolute;
-  right: -3px;
+  right: 0px;
 }
 .topActions
 {
