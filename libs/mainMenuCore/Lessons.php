@@ -5,7 +5,14 @@
 	{                
 	    public function jsonSerialize()
 	    {
-	        
+			return array(
+				'Caption' => $this->name,
+				'Discription' => $this->Discription,
+				'FileCount' => $this->fileCount,
+				'Datemade' => $this->datemade,
+				'LastModification' => $this->lastModification,
+				'Type' => $this->type
+			);
 	    }
 	
 	    public function EducationObjectInfo($id) {
@@ -73,6 +80,27 @@
                         
          $this->img = $name;
          $this->objectId = $lastInsertId;
-	    }	
+	    }
+
+		public function Info($id)
+		{
+			$mysqli = $GLOBALS['mysqli'];
+
+			$lessonInfo = $mysqli->query("
+			SELECT lessonName, datemade, lastModification, discription, IFNULL(fileCount.files, 0) as fileCount
+			FROM lessons LEFT JOIN
+			(SELECT lesson_id_fk, COUNT(*) as files
+				FROM lessonsFiles GROUP BY lesson_id_fk) as fileCount
+			ON (lessons.lesson_id = fileCount.lesson_id_fk)
+			WHERE lesson_id = $id
+			");
+			$this->discription = $mysqli->result($lessonInfo, 0,"discription");
+			$this->name = $mysqli->result($lessonInfo, 0,"lessonName");
+			$this->datemade = $mysqli->result($lessonInfo, 0,"datemade");
+			$this->lastModification = $mysqli->result($lessonInfo, 0,"lastModification");
+			$this->fileCount = $mysqli->result($lessonInfo, 0,"fileCount");
+			$this->Discription = ( empty($discription ) ) ? "нет" : $discription;
+			$this->type = 1;
+		}
 	} 
 ?>

@@ -11,11 +11,14 @@
 	$mysqli->query("SET NAMES utf8");
 	
 	/*вход и выход из системы*/
-	if (empty($_SESSION['userId'])) {
+	if (empty($_SESSION['userId']))
+    {
 		$autorization = new AutClass();
-		if(!empty($_POST['log'])) {
+		if(!empty($_POST['log']))
+        {
 			$autorization->logIn($_POST['log'], $_POST['pas']);
-			switch ($_SESSION['userType']) {
+			switch ($_SESSION['userType'])
+            {
 				case 1:
                     $student = new studentMainMenu($_SESSION['userId']);
                     echo "0";
@@ -31,23 +34,31 @@
                     $admin = new adminMainMenu($_SESSION['userId']);
 					break;
 			}
-		} else {
+		}
+        else
+        {
 			$autorization->getAutForm();
 		}
-	} else {
-		switch ($_SESSION['userType']) {
+	}
+    else
+    {
+		switch ($_SESSION['userType'])
+        {
             case 0: 
                 die ("Неверно введен логин или пароль");
                 break;
             
             case 1: // Ученик
                 $student = new studentMainMenu($_SESSION['userId']);
-                if (empty($_GET) && empty($_POST)) {
+                if (empty($_GET) && empty($_POST))
+                {
                     $student->getMenu();
                     return;
                 }
-                foreach ($_GET as $key => $value) {
-                    switch ($key) {
+                foreach ($_GET as $key => $value)
+                {
+                    switch ($key)
+                    {
                         case 'getThemeInfo':
                             $student->GetThemeInfo($_GET['getThemeInfo']);
                             return;
@@ -67,8 +78,10 @@
                             break;
                     }
                 }
-                foreach ($_POST as $key => $value) {
-                    switch ($key) {
+                foreach ($_POST as $key => $value)
+                {
+                    switch ($key)
+                    {
                         case 'sayHello':
                             echo "Hi! I'm Post request".$_POST['newLessonDiscription'];
                             print_r($_FILES['upload']);
@@ -80,15 +93,22 @@
 
             case 2: // Учитель
                 $teacher = new teacherMainMenu($_SESSION['userId']);
-                if (empty($_GET) && empty($_POST)) {						
+                if (empty($_GET) && empty($_POST))
+                {
                     $teacher->getMenu();
                     return;
                 }
-                foreach ($_GET as $key => $value) {
-                    switch ($key) {
+                foreach ($_GET as $key => $value)
+                {
+                    switch ($key)
+                    {
                         case 'getThemeInfo':
                                 $teacher->GetThemeInfo($_GET['getThemeInfo']);
                                 return;
+
+                        case 'getEducationObjectInfo':
+                            $teacher->GetEducationObjectInfo($_GET['getEducationObjectInfo']/*, $_GET['educationObjectType']*/);
+                            return;
 
                         case 'theme':
                                 $_SESSION['CurrentTheme'] = $_GET['theme'];
@@ -117,8 +137,10 @@
                             break;
                     }
                 }
-                foreach ($_POST as $key => $value) {
-                    switch ($key) {		
+                foreach ($_POST as $key => $value)
+                {
+                    switch ($key)
+                    {
                         case 'newThemeName':
                                 $teacher->newTheme($_POST['newThemeName'], $_POST['newThemeDiscription'], $_FILES['upload']);
                                 return;
@@ -134,6 +156,10 @@
                         case 'editTheme':						
                                 $teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], @($_POST['editThemePict']) ? $_FILES['upload'] : "");
                                 return;
+
+                        case 'editLesson':
+                            $teacher->EditTheme($_POST['editTheme'], $_POST['editThemeName'], $_POST['editThemeDiscription'], @($_POST['editThemePict']) ? $_FILES['upload'] : "");
+                            return;
 
                         default:
                                 $teacher->getMenu(); return;

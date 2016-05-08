@@ -1,7 +1,8 @@
 <?php 
     switch($_SESSION['userType']) {
         // Для студента
-        case 1: {
+        case 1:
+        {
             return '
                 <div class="objBox" id=Theme_'.$this->themeId.'>
                     <img class="objImg" src='.(($this->themeIMG)?('themes/theme_'.$this->themeId.'/'.$this->themeIMG):'').'>
@@ -22,7 +23,8 @@
         }
         // Для преподователя и админов
         case 2:
-        case 3: {
+        case 3:
+        {
             return '
                 <div class="objBox" id=Theme_'.$this->themeId.'>
                     <img class="objImg" src='.(($this->themeIMG)?('themes/theme_'.$this->themeId.'/'.$this->themeIMG):'').'>
