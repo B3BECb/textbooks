@@ -16,9 +16,9 @@
 	    {
 	    	$this->objectId = $result['lesson_id'];
 	        $this->name	= $result['lessonName'];
-	        $this->discription	= $result['discription'];
-	        //$this->theme      = $result['img'];
-	        $this->img	= $result['img'];
+	        $this->discription = $result['discription'];
+	        $this->theme  = $_GET['theme']; // Временно
+	        $this->img = $result['img'];
 	    }
 	
 	    public function getElement() {
