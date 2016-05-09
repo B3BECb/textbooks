@@ -1,0 +1,19 @@
+<?xml version='1.0'?> 
+<document>
+	<versionInfo>
+		<incomingVersion>1</incomingVersion>
+	</versionInfo>
+	<projectInfo>
+		<Name>textbooks</Name>
+		<DatabaseName></DatabaseName>
+		<DatabaseUser>root</DatabaseUser>
+		<DatabasePassword></DatabasePassword>
+	</projectInfo>
+	<database>
+		<request>
+			CREATE DATABASE textbooks42
+		</request>
+	</database>
+	<paths>
+	</paths>
+</document>
