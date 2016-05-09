@@ -1,0 +1,3 @@
+[submodule "tools/PhpProjectUpdater"]
+	path = tools/PhpProjectUpdater
+	url = git@github.com:B3BECb/PhpProjectUpdater.git
