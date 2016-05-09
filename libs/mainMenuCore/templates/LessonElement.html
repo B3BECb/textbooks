@@ -26,10 +26,10 @@
             return '
                 <div class="objBox" id=Theme_'.$this->objectId.'>
                     <img class="objImg" src='.(($this->img)?('themes/theme_'.$this->theme.'/lesson_'.$this->objectId.'/'.$this->img):'').'>
-                    <div class="objName" onClick="location.href=\'?lesson='.$this->objectId .'\'"> 
+                    <div class="objName" onClick="location.href=\'?lesson='.$this->objectId .'\'">
                         <span class="name">'.$this->name.'</span>
                     </div>	
-                    <div class="objDiscription" onClick="location.href=\'?lesson='.$this->objectId.'\'">'.$this->discription.'</div>			
+                    <div class="objDiscription" onClick="location.href=\'?lesson='.$this->objectId.'\'">'.$this->discription.'</div>
                     <div class="objControls">
                         <span class="topBtn">
                             <div onClick="FillEditTheme(this, '.$this->objectId.');" class="controlButton" style="top:0px; position:relative;">

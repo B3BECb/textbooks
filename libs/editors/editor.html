@@ -1,14 +1,16 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>A Simple Page with CKEditor</title>
+        <title>Редактор</title>
         <!-- Make sure the path to CKEditor is correct. -->
-        <script src="ckeditor/ckeditor.js"></script>
+        <script src="libs/editors/ckeditor/ckeditor.js"></script>
     </head>
     <body>
         <form>
             <textarea name="editor1" id="editor1" rows="10" cols="80">
-                This is my textarea to be replaced with CKEditor.
+                <?php
+                        if(!@include $path) echo "Введите текст урока";
+                ?>
             </textarea>
             <script>         
                 CKEDITOR.replace( 'editor1');
@@ -16,4 +18,3 @@
         </form>
     </body>
 </html>
-   
