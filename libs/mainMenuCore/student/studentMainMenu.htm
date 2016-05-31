@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../../css/elements.css">
+		<link rel="stylesheet" type="text/css" href="libs/mainMenuCore/css/main.css">
+		<script type="text/javascript" src="../../js/jquery/jquery-2.1.4.min.js"></script>		
+		<script type="text/javascript" src="libs/mainMenuCore/js/styles.js"></script>
+		<script type="text/javascript" src="../../js/queryToServer.js"></script>
+		<script type="text/javascript" src="libs/mainMenuCore/js/studentMainMenu.js"></script>
+	</head>
+	<body>
+		<div class="top">
+			<div class="topBg">
+			</div>
+			<div class="topContent">
+				<span class="topDateTimeFio">
+					<?php 
+                        echo "Здравствуйте, <i>".$this->getFIO()."</i>. Здесь представлены доступные вам темы. Сегодня <i>".date("d.m.Y")."</i>"; 
+                    ?>
+				</span>
+				<span class="topBtn">
+					<div onClick="document.location='?exit=1'" class="topButton"><span class="topButtonText">Выход</span><img src="../../svgs/1462721444_Exit.svg"></div>
+				</span>
+				<div class="topActions">					
+					<div id="searchBtn" class="searchButton"><span class="topButtonText">Поиск</span><img src="../../svgs/1462721454_Magnifier.svg"></div>
+					<div class="searchElements">
+						<input type="text" style="height:33px; width:400;" value="Поиск"> 
+						<div class="button"><span class="buttonText">Найти</span></div>
+					</div>
+				</div>
+			</div>
+		</div>		
+
+		<div id="objectsBody" style="margin-top: 30px; position: absolute;">
+			<?php echo $this->getThemes(); ?>
+		</div>
+
+		<div id="ThemeInfo" class="modalContainer" style="top: 100px; display:none; z-index: 4">
+			<div class="modalWindowPageBg"></div>
+			<div class="modalWindow" style=" height: inherit; width: 600px;">
+				<div id = "themeInfoContent" class="content">
+					<div class="modalWindowCaption">Информация о теме</div>
+					<div class="themeInfoContent">Кто создал</div>
+					<div class="themeInfoContent">Название</div>
+					<div class="themeInfoContent">Сколько учебников</div>
+					<div class="themeInfoContent">Сколько презентаций</div>
+					<div class="themeInfoContent" style="height: 250;">Описание</div>
+					<div class="button" onclick="$('#ThemeInfo').hide();">
+						<span class="buttonText">Вернуться</span>
+					</div>					
+				</div>
+			</div>
+        </div>
+        
+        <iframe id="rFrame" name="rFrame" style="display: none"></iframe>
+	</body>
+</html>

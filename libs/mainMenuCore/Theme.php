@@ -17,9 +17,9 @@
 	    //нет полиморфизма - используем говно и палки!
 	    function NewThemeConstruct($themeName, $userId, $themeDiscription = '', $themeIMG = '')
 	    {
-	        $this->Caption	= $themeName;
-	        $this->Discription	= $themeDiscription;
-	        $this->autorId      = $userId;
+	        $this->Caption = $themeName;
+	        $this->Discription = $themeDiscription;
+	        $this->autorId = $userId;
 	        $this->themeIMG	= $themeIMG;
 	        
 	        $this->newTheme();
@@ -27,17 +27,17 @@
 	    
 	    function EditThemeConstruct($themeName, $themeId, $themeDiscription = '', $themeIMG = '')
 	    {
-	        $this->Caption	= $themeName;
-	        $this->Discription	= $themeDiscription;
-	        $this->themeId      = $themeId;
+	        $this->Caption = $themeName;
+	        $this->Discription = $themeDiscription;
+	        $this->themeId = $themeId;
 	        $this->themeIMG	= $themeIMG;
 	    }
 	    
 	    function GetThemeConstruct($result)
 	    {
-	        $this->Caption	= $result['themeName'];
-	        $this->Discription	= $result['discription'];
-	        $this->themeId      = $result['theme_id'];
+	        $this->Caption = $result['themeName'];
+	        $this->Discription = $result['discription'];
+	        $this->themeId = $result['theme_id'];
 	        $this->themeIMG	= $result['img'];
 	    }
                         
@@ -62,7 +62,7 @@
 			//Создать новую директорию темы
 			mkdir("themes/theme_$lastInsertId");
                         
-                        $name = '';
+            $name = '';
                         
 			if ($this->themeIMG['tmp_name'])
 			{					
@@ -73,13 +73,12 @@
 				if (!($success = move_uploaded_file($this->themeIMG['tmp_name'], $file))) throw new Exception("Ошибка перемещения файла.");
 			}	
                         
-                        $this->themeIMG = $name;
-                        $this->themeId = $lastInsertId;
+            $this->themeIMG = $name;
+            $this->themeId = $lastInsertId;
 		}
 		
 		function ThemeInfo($id)
 		{
-			
 			$mysqli = $GLOBALS['mysqli'];
 
 			$autor = $mysqli->query("SELECT teacher_id, fio FROM teachers WHERE teacher_id = (SELECT teacher_id_fk FROM themes WHERE theme_id = $id)");
@@ -91,14 +90,14 @@
 			$discription = $mysqli->result($theme, 0, "discription");
 			$this->Discription = ( empty($discription ) ) ? "нет" : $discription;
 
-			//$additionalThemeinfo = $mysqli->query();
-			$this->LessonsCount = 0/*$mysqli->result($additionalThemeinfo, 0)*/;
-			$this->PresentationsCount = 0/*$mysqli->result($additionalThemeinfo, 0)*/;
+			// $additionalThemeinfo = $mysqli->query();
+			$this->LessonsCount = 0 /*$mysqli->result($additionalThemeinfo, 0)*/;
+			$this->PresentationsCount = 0 /*$mysqli->result($additionalThemeinfo, 0)*/;
 		}
                 
 	    public function getElement()
 	    {                  
-	       return include 'themeElement.htm';
+	       return include 'templates/themeElement.htm';
 	    }
 	
 	    public function jsonSerialize() 

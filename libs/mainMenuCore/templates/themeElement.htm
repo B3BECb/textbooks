@@ -1,0 +1,63 @@
+<?php 
+    switch($_SESSION['userType']) {
+        // Для студента
+        case 1:
+        {
+            return '
+                <div class="objBox" id=Theme_'.$this->themeId.'>
+                    <img class="objImg" src='.(($this->themeIMG)?('themes/theme_'.$this->themeId.'/'.$this->themeIMG):'').'>
+                    <div class="objName" onClick="location.href=\'?theme='.$this->themeId .'\'"> 
+                        <span class="name">'.$this->Caption.'</span>
+                    </div>	
+                    <div class="objDiscription" onClick="location.href=\'?theme='.$this->themeId.'\'">'.$this->Discription.'</div>			
+                    <div class="objControls">
+                        <span class="topBtn">
+                            <div onClick="ThemeInfo('.$this->themeId.');" class="controlButton" style="top:0px; position:relative;">
+                                <span class="topButtonText">Cведения</span>
+                                <img src="../../../svgs/1462721457_Info.svg">
+                            </div>
+                        </span>
+                    </div>
+                </div>';            
+            break;
+        }
+        // Для преподователя и админов
+        case 2:
+        case 3:
+        {
+            return '
+                <div class="objBox" id=Theme_'.$this->themeId.'>
+                    <img class="objImg" src='.(($this->themeIMG)?('themes/theme_'.$this->themeId.'/'.$this->themeIMG):'').'>
+                    <div class="objName" onClick="location.href=\'?theme='.$this->themeId .'\'"> 
+                        <span class="name">'.$this->Caption.'</span>
+                    </div>	
+                    <div class="objDiscription" onClick="location.href=\'?theme='.$this->themeId.'\'">'.$this->Discription.'</div>
+                    <div class="objControls">
+
+                        <span class="topBtn">
+                            <div onClick="FillEditTheme(this, '.$this->themeId.');" class="controlButton" style="top:0px; position:relative;">
+                                <span class="topButtonText">Изменить</span>
+                                <img src="../../../svgs/1462721460_EditDocument.svg">
+                            </div>
+                        </span>
+
+                        <span class="topBtn">
+                            <div onClick="ThemeInfo('.$this->themeId.');" class="controlButton" style="top:0px; position:relative;">
+                                <span class="topButtonText">Cведения</span>
+                                <img src="../../../svgs/1462721457_Info.svg">
+                            </div>
+                        </span>
+
+                        <span class="topBtn">
+                            <div onClick="RemoveTheme(this, '.$this->themeId.');" class="controlButton" style="top:0px; position:relative;">
+                                <span class="topButtonText">Удалить</span>
+                                <img src="../../../svgs/1462721463_Cancel.svg">
+                            </div>
+                        </span>
+
+                    </div>
+                </div>';
+            break;
+        }
+    }
+?>

@@ -9,7 +9,9 @@
 	*/
 	interface IUser
 	{
-		public function EditTheme($themeId, $themeName, $discription, $img );
+		public function EditTheme($themeId, $themeName, $discription, $img);
+        
+		public function EditLesson($lessId, $lessName, $discription, $img);        
 
 		public function getMenu();
 		
@@ -25,7 +27,7 @@
     {
         public function getElement();
         
-        public function Info($id);
+        public function EducationObjectInfo($id);
     }
 
 	/**
@@ -37,15 +39,15 @@
             public $FIO;	
 
             function removeDirectory($dir) 
-            {			
-                    if ($objs = glob($dir."/*")) 
+            {		
+                if ($objs = glob($dir."/*"))
+                {
+                    foreach($objs as $obj)
                     {
-                            foreach($objs as $obj) 
-                            {
-                                    is_dir($obj) ? removeDirectory($obj) : unlink($obj);
-                            }
+                        is_dir($obj) ? removeDirectory($obj) : unlink($obj);
                     }
-                    rmdir($dir);
+                }
+                rmdir($dir);
             }
 
             function RemoveTheme($themeId)
@@ -66,7 +68,7 @@
                 $this->removeDirectory("themes/theme_$themeId/lesson_$lessonId");
                 $mysqli->query("DELETE FROM lessons WHERE lesson_id = $lessonId;");
 
-                echo "Готово.";
+                echo "Урок удален.";
            	}
 
             function GetThemeInfo($theme_id)
@@ -75,20 +77,6 @@
                     $theme->ThemeInfo($theme_id);
                     echo json_encode($theme);                 
             }
-            
-            function GetEducationObjectInfo($objectId, $objectType) 
-            {
-            	if($objectType == 0)
-            	{
-            		$lesson = new Lesson;
-                    $lesson->EducationObjectInfo($objectId);
-                    echo json_encode($lesson);
-                }
-                else 
-                {
-                	//presentation
-                }
-            }            	
 
             function getFIO()
             {
@@ -123,12 +111,11 @@
                 }
                 catch (Exception $e)
                 {
-                        echo json_encode(array('Msg' => 'Ошибка! '.$e->getMessage()));                       
-                        return;
-                }	
-                
+                    echo json_encode(array('Msg' => 'Ошибка! '.$e->getMessage()));                       
+                    return;
+                }
                 echo json_encode(array('Msg' => 'Готово.', 'Element' => $educObject->getElement()));
-            } 
+            }
 	}           
              	
 ?>
